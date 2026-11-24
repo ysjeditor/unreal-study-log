@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# C++ 빌드 결과물
+*.o
+*.out
+hello
+build/
