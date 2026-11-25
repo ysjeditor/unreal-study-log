@@ -187,15 +187,68 @@
 - 유니티에서 `Library/`·`Temp/`를 커밋하지 않듯, 언리얼은 `Binaries/`·`Intermediate/`·`Saved/`·`DerivedDataCache/`를 커밋하지 않는다.
 
 **✅ 과제**
-- [ ] `환경` **[필수]** Epic Games Launcher → **UE 5.8**(최신 핫픽스) 설치. 설치 옵션에 'Editor symbols for debugging'이 보이면 체크(엔진 내부 콜스택 확인용, 용량 큼)
-- [ ] `환경` **[필수]** Xcode 맞추기: `xcode-select -p`로 현재 경로 확인 → 26.4 이상 Xcode만 있다면 Apple Developer 'More Downloads'에서 **Xcode 26.1.1**을 받아 `Xcode_26.1.1.app`으로 나란히 설치 → `sudo xcode-select -s /Applications/Xcode_26.1.1.app` → 한 번 실행해 추가 구성요소 설치 (설치 직전 공식 요구사항 페이지 재확인)
-- [ ] `환경` **[필수]** JetBrains **Rider**(비상업 무료 라이선스) 설치 → `.uproject`를 직접 열고 RiderLink 설치 안내 수락
-- [ ] `환경` **[필수]** 가벼운 설정: 프로젝트 생성 시 Desktop·**Scalable**·Starter Content 끔 / Engine Scalability **Medium**(발열 시 Low) / Editor Preferences → 'Use Less CPU when in Background' 체크 / 작업 중 브라우저 탭·다른 앱 최소화
-- [ ] `환경` **[필수]** 테스트용 빈 C++ 프로젝트(`Sandbox`, 커밋 안 함)의 BeginPlay에 `UE_LOG` + 중단점 → Rider에서 멈추고 콜스택이 보이는지 확인, 클린/증분 빌드 시간 기록
+- [ ] `환경` **[필수]** **UE 5.8** 설치 (Epic Games Launcher)
+    - 👣 **따라 하기: UE 5.8 설치 (Epic Games Launcher)**
+        1. **런처 설치** — store.epicgames.com에서 **Epic Games Launcher**를 내려받아 설치 → 실행 → Epic 계정으로 로그인 (없으면 새로 만들기)
+        2. **언리얼 화면으로** — 런처 왼쪽 메뉴 `Unreal Engine` → 위쪽 `Library`(라이브러리) 탭
+        3. **버전 추가** — `ENGINE VERSIONS` 옆 노란 `+` 버튼 → 새로 생긴 칸의 버전 숫자 ▾ → **5.8.x 중 가장 높은 번호** 선택 → `Install`
+        4. **위치·옵션** — 설치 위치는 기본값 그대로 → `Options`에 'Editor symbols for debugging'(디버깅용 기호)이 보이면 체크. 용량이 커지지만 엔진 내부까지 콜스택을 볼 수 있다
+        5. **기다리는 동안** — 수십 GB라 **몇 시간** 걸릴 수 있다. 전원을 연결하고, 받는 동안 다음 과제(Xcode)를 같이 진행
+        6. **확인** — `Library`의 5.8 칸에 `Launch` 버튼이 보이면 완료 (지금 실행하지 않아도 된다)
+- [ ] `환경` **[필수]** **Xcode 26.1.1** 설치하고 언리얼이 쓰도록 고르기
+    - 👣 **따라 하기: Xcode 26.1.1 설치하고 언리얼이 쓰도록 고르기**
+        1. **왜 하나요?** — UE 5.8은 Xcode **26.1.1**을 권장하고 26.4 이상은 맞지 않는다고 공식 문서에 적혀 있다. 지금 맥에 있는 Xcode는 지우지 말고 **하나 더 나란히** 설치한다
+        2. **내려받기** — 브라우저에서 `developer.apple.com/download/all` → Apple ID로 로그인 → 검색창에 `Xcode 26.1.1` → `Xcode_26.1.1.xip` 다운로드 (10GB 안팎)
+        3. **압축 풀기** — 다운로드 폴더의 `.xip`을 더블클릭 → `Xcode.app`이 생기면 이름을 `Xcode_26.1.1.app`으로 바꾸고 → Finder의 `응용 프로그램` 폴더로 끌어다 놓기
+        4. **터미널 열기** — ⌘ + Space(Spotlight) → `터미널` 입력 → 엔터. 글자로 명령을 입력하는 맥 기본 앱이다
+        5. **Xcode 고르기** — 아래 명령을 복사해 터미널에 붙여넣고 엔터 → `Password:`가 나오면 **맥 로그인 비밀번호** 입력 후 엔터 (입력해도 화면에 아무것도 안 보이는 게 정상)  `sudo xcode-select -s /Applications/Xcode_26.1.1.app`
+        6. **확인** — 아래 명령을 붙여넣고 엔터 → `/Applications/Xcode_26.1.1.app/Contents/Developer`가 나오면 성공  `xcode-select -p`
+        7. **처음 한 번 실행** — `응용 프로그램`에서 `Xcode_26.1.1`을 열고 라이선스 `Agree` → 추가 구성요소 `Install`이 끝나면 Xcode는 닫아도 된다
+- [ ] `환경` **[필수]** **Rider** 설치 + 비상업 무료 라이선스
+    - 👣 **따라 하기: Rider 설치 · 비상업 무료 라이선스**
+        1. **내려받기** — jetbrains.com/rider/download → macOS **Apple Silicon** 버전 `.dmg` 받기 → 열어서 Rider 아이콘을 `Applications`로 끌어다 놓기
+        2. **라이선스** — Rider 첫 실행 → 라이선스 창에서 **Non-commercial use(비상업적 사용)** 선택 → JetBrains 계정으로 로그인(없으면 만들기) → 약관 동의 → `Start Non-Commercial Use`. 놓쳤다면 메뉴 `Help` → `Manage Licenses…`
+        3. **처음 설정** — 테마·키맵 묻는 화면은 기본값으로 `Next`/`Skip` (나중에 바꿀 수 있다)
+        4. **다음 단계** — 언리얼 프로젝트와 연결(RiderLink)은 다음 과제 '연습 프로젝트 Sandbox'에서 한다
+- [ ] `환경` **[필수]** 에디터를 가볍게 설정하기 (16GB 맥용)
+    - 👣 **따라 하기: 에디터를 가볍게 만들기 (16GB 맥)**
+        1. **프로젝트 만들 때** — 프로젝트 브라우저 `Games` → `Blank` → 오른쪽 옵션: `C++` · Target Platform `Desktop` · Quality Preset **`Scalable`** · `Starter Content` 체크 해제
+        2. **화질 낮추기** — 에디터 뷰포트 위쪽 툴바의 **계기판(속도계) 아이콘** → Scalability 항목에서 `Medium`(맥이 뜨거우면 `Low`). UE 5.5 이전은 오른쪽 위 `Settings` 메뉴에 있다
+        3. **뒤에 있을 때 CPU 줄이기** — 에디터 창 왼쪽 위 메뉴 `Edit` → `Editor Preferences` → 위쪽 검색창에 `Use Less CPU` → `Use Less CPU when in Background` 체크
+        4. **작업 습관** — 에디터를 쓸 땐 브라우저 탭·다른 앱을 줄이고, ▶ Play는 짧게 확인하고 ■ Stop
+- [ ] `환경` **[필수]** 연습 프로젝트 `Sandbox`로 '빌드 → 중단점' 해 보기 (커밋 안 함)
+    - 👣 **따라 하기: 연습 프로젝트로 '빌드 → 중단점' 해 보기**
+        1. **프로젝트 만들기** — 런처 `Unreal Engine` → `Library` → 5.8 `Launch` → 프로젝트 브라우저 `Games` → `Blank` → `C++`·`Desktop`·`Scalable`·Starter Content 해제 → 위치 `Projects` · 이름 `Sandbox` → `Create` (첫 컴파일에 몇 분 걸린다)
+        2. **C++ 클래스 만들기** — 에디터 메뉴 `Tools` → `New C++ Class…` → `Actor` 선택 → 이름 `MyActor` → `Create Class` → 완료되면 에디터를 닫는다
+        3. **Rider로 열기** — Rider Welcome 화면 `Open` → `Projects/Sandbox/Sandbox.uproject` 선택 → `Open`
+        4. **RiderLink 설치** — 오른쪽 아래에 RiderLink 설치 알림이 뜨면 **`Game`**(이 프로젝트에만) 쪽 선택 → 끝날 때까지 기다리기. 놓쳤다면 `Rider` 메뉴 → `Settings…` → Languages & Frameworks → Unreal Engine
+        5. **인덱싱 기다리기** — 처음엔 엔진 코드를 읽느라 오른쪽 아래 진행 막대가 한참 돈다. 끝나야 자동완성·정의로 이동(⌘B)이 빠르다
+        6. **코드 한 줄** — 왼쪽 파일 목록에서 `MyActor.cpp` 열기 → `BeginPlay()` 안 `Super::BeginPlay();` 바로 아랫줄에 아래 코드 붙여넣기  `UE_LOG(LogTemp, Warning, TEXT("Hello Unreal from C++!"));`
+        7. **중단점 찍기** — 방금 붙인 줄의 **줄 번호 왼쪽 빈칸**을 클릭 → 빨간 점이 생기면 중단점('이 줄에서 멈춰라')
+        8. **디버그 실행** — Rider 위쪽 실행 구성이 `Sandbox` · `Development Editor`인지 확인 → 옆의 **벌레 모양(Debug) 버튼** 클릭 → 빌드가 끝나면 언리얼 에디터가 뜬다
+        9. **멈추는지 확인** — 콘텐츠 브라우저 `C++ Classes` 폴더의 `MyActor`를 레벨로 끌어다 놓기 → 위쪽 ▶ `Play` → Rider가 앞으로 나오며 그 줄에서 멈추고 아래 `Debug` 창에 콜스택(호출 순서)이 보이면 성공 → Rider의 ▶ `Resume`으로 계속
+        10. **앞으로의 빌드 루프** — C++를 고칠 때마다 ① 에디터 종료(또는 Rider 빨간 ■ Stop) → ② 코드 수정 → ③ 다시 벌레 버튼으로 실행. 맥에서는 Live Coding에 기대지 않는다. 헤더(.h)를 고쳤다면 특히 꼭 재시작
+        11. **시간 기록** — Rider 아래 `Build` 창에 나온 빌드 시간을 TIL에 적어 두기 (나중에 비교 기준)
 - [ ] `Git` **[필수]** **GitHub Desktop** 설치·로그인 → 이름·이메일 확인 → Git LFS 무료 한도 확인 (카드의 따라 하기 순서대로)
-- [ ] `Git` **[필수]** 학습 로그 저장소 `unreal-study-log`(이 커리큘럼이 들어 있는 저장소)를 GitHub Desktop에 추가하고 Publish (카드의 따라 하기 순서대로)
+    - 👣 **따라 하기: GitHub Desktop 설치 · 로그인**
+        1. **설치** — desktop.github.com에서 GitHub Desktop을 내려받아 응용 프로그램 폴더로 옮기고 실행
+        2. **로그인** — `Sign in to GitHub.com` → 브라우저에서 `Authorize desktop` 승인 → Desktop으로 돌아오기
+        3. **계정 확인** — 메뉴 `GitHub Desktop` → `Settings…` → `Accounts`에 내 GitHub 계정이 보이면 OK
+        4. **이름·이메일** — 같은 창의 `Git` 탭에서 Name·Email이 GitHub 계정과 같은지 확인 → `Save`
+        5. **작업 폴더** — Finder에서 홈 폴더(⌘⇧H) → `Projects` 폴더 확인 (미리 만들어 둠) — 앞으로 모든 저장소를 여기에 둔다
+        6. **무료 한도 확인** — GitHub 웹 Settings의 결제(Billing) 메뉴에서 Git LFS 무료 한도 확인(저장 10GiB · 월 10GiB). 결제수단이 없으면 초과 시 업로드가 막힐 뿐 요금은 나가지 않는다
+- [ ] `Git` **[필수]** 학습 로그 저장소 `unreal-study-log`가 GitHub에 올라가 있는지 확인 (이미 올렸다면 바로 체크)
+    - 👣 **따라 하기: 학습 로그 저장소 확인 (이미 올렸다면 체크만)**
+        1. **GitHub Desktop** — 왼쪽 위 `Current Repository` 목록에 `unreal-study-log`가 있으면 OK
+        2. **GitHub 웹** — 메뉴 `Repository` → `View on GitHub` → README와 `curriculum`·`ue5-til` 폴더가 보이면 완료
+        3. **아직이라면** — 📚 전체 커리큘럼 → `Git 기록 가이드` 탭의 '학습 로그 저장소 GitHub에 올리기' 순서대로
 - [ ] `Git` **[필수]** GitHub 프로필 정리(사진·한 줄 소개) + 브라우저에서 학습 로그 저장소의 README가 보이는지 확인
-- [ ] `AI` **[필수]** AI 도구 준비: 채팅형 1개 + 코드 맥락을 읽는 도구 1개(Rider AI Assistant, Claude Code, Cursor 등). 게임 저장소 루트에 AI 규칙 파일(예: `CLAUDE.md`)을 두고 'UE 5.8 · Epic 코딩 표준 · 힌트 먼저 · 모든 줄 해설' 규칙을 적는다
+- [ ] `AI` **[필수]** AI 도구 2개 준비 + AI 학습 원칙 읽기
+    - 👣 **따라 하기: AI 도구 준비**
+        1. **채팅형 AI 1개** — Claude·ChatGPT·Gemini 중 하나 — 개념 질문과 설명용
+        2. **코드를 읽는 AI 1개** — Rider AI Assistant, Claude Code, Cursor 중 하나 — 내 프로젝트 파일을 보며 답하게 할 때
+        3. **규칙 파일** — `CLAUDE.md`는 W1 첫날 카드의 '파일 받기'로 게임 저장소에 넣는다. 'UE 5.8 · Epic 코딩 표준 · 힌트 먼저 · 모든 줄 해설' 규칙이 들어 있다
+        4. **원칙 읽기** — 📚 전체 커리큘럼 → `AI 학습법` 탭의 5원칙과 AI 레벨(L1→L3)을 한 번 읽기
 - [ ] `소스` [심화] (선택) Epic Games 계정 ↔ GitHub 연동 → EpicGames 조직 초대 수락 → 웹에서 `EpicGames/UnrealEngine` 열람 확인
 
 **📦 산출물:** 학습 로그 저장소 첫 커밋 · 빌드 시간 기록(이후 비교 기준) · AI 규칙 파일
@@ -223,11 +276,11 @@
 ```
 
 **📅 요일별 계획** (날짜는 HTML의 '오늘 학습'에서 시작일을 정하면 계산됩니다)
-- Day 1 (월, 약 3시간): 과제1 Epic Games Launcher → UE 5.8(최신 핫픽스) 설치.… · 과제2 Xcode 맞추기 · 자가 점검
-- Day 2 (화, 약 3시간): 과제3 JetBrains Rider(비상업 무료 라이선스) 설치 → .uproje… · 과제4 가벼운 설정
-- Day 3 (수, 약 3시간): 과제5 테스트용 빈 C++ 프로젝트(Sandbox, 커밋 안 함)의 BeginPl…
-- Day 4 (목, 약 3시간): 과제6 GitHub Desktop 설치·로그인 → 이름·이메일 확인 → Git L… · 과제7 학습 로그 저장소 unreal-study-log(이 커리큘럼이 들어 있는… · 자가 점검
-- Day 5 (금, 약 3시간): 과제8 GitHub 프로필 정리(사진·한 줄 소개) + 브라우저에서 학습 로그 저… · 과제9 AI 도구 준비 · 과제10 (선택) Epic Games 계정 ↔ GitHub 연동 → EpicGame…(심화) · TIL
+- Day 1 (월, 약 3시간): 과제1 UE 5.8 설치 (Epic Games Launcher) · 과제2 Xcode 26.1.1 설치하고 언리얼이 쓰도록 고르기 · 자가 점검
+- Day 2 (화, 약 3시간): 과제3 Rider 설치 + 비상업 무료 라이선스
+- Day 3 (수, 약 3시간): 과제5 연습 프로젝트 Sandbox로 '빌드 → 중단점' 해 보기 (커밋 안 함) · 과제4 에디터를 가볍게 설정하기 (16GB 맥용)
+- Day 4 (목, 약 3시간): 과제6 GitHub Desktop 설치·로그인 → 이름·이메일 확인 → Git L… · 과제7 학습 로그 저장소 unreal-study-log가 GitHub에 올라가 있… · 자가 점검
+- Day 5 (금, 약 3시간): 과제8 GitHub 프로필 정리(사진·한 줄 소개) + 브라우저에서 학습 로그 저… · 과제9 AI 도구 2개 준비 + AI 학습 원칙 읽기 · 과제10 (선택) Epic Games 계정 ↔ GitHub 연동 → EpicGame…(심화) · TIL
 - Day 6 (토, 약 5.5시간): 휴식
 - Day 7 (일, 약 2.5시간): 휴식
 
@@ -271,12 +324,24 @@
 | `Engine/Source/Runtime/Core/Public/Logging/LogMacros.h` | `UE_LOG` 매크로가 정의된 위치 확인 |
 
 **✅ 과제**
-- [ ] `구현` **[필수]** UE 프로젝트 `ActionArena` 생성(Blank, C++, Scalable, Starter Content 없음) → **GitHub Desktop으로 게임 저장소 만들기·Publish** → 웹에서 Labels·Milestones(M1~M6)·Projects 보드 만들기 (카드의 따라 하기 순서대로)
+- [ ] `구현` **[필수]** UE 프로젝트 `ActionArena` 만들고 GitHub Desktop으로 게임 저장소 올리기
+    - 👣 **따라 하기: 게임 저장소 만들기 (UE 프로젝트 연결)**
+        1. **프로젝트 만들기** — 언리얼 에디터: Games → Blank → C++ · Desktop · Scalable · Starter Content 끔 · 위치 `Projects` · 이름 `ActionArena` → Create → 에디터가 열리면 한 번 닫기
+        2. **LFS 설정 파일 넣기** — 아래 '파일 받기'로 `gitattributes.txt`를 받아 Finder에서 `ActionArena` 폴더로 옮긴 뒤 이름을 `.gitattributes`로 바꾸기 → 경고 창에서 `'.' 사용` → 파일이 사라져 보이면 정상(숨김 파일, ⌘⇧. 로 보기). `CLAUDE.md`도 같은 폴더에 넣기
+        3. **저장소로 만들기** — GitHub Desktop `File` → `Add Local Repository…` → `Choose…`로 `ActionArena` 폴더 선택 → 안내 문구의 `create a repository` 클릭
+        4. **만들기 창** — Name은 **그대로**(`ActionArena`) · Git Ignore는 **`UnrealEngine`** 선택 · README 체크 안 함 → `Create Repository` → Git LFS를 묻는 창이 뜨면 `Initialize Git LFS`
+        5. **빠진 파일 확인** — 왼쪽 `Changes` 탭에 `Binaries`·`Intermediate`·`Saved`·`DerivedDataCache`가 **보이면 안 됨**(보이면 멈추고 질문). `.DS_Store`가 보이면 우클릭 → `Ignore all .DS_Store files`. 남은 파일이 있으면 Summary에 `chore: UE 5.8 프로젝트 생성` → `Commit to main`
+        6. **GitHub에 올리기** — 위쪽 `Publish repository` → Name을 `UE5-ActionArena`로 바꾸고 `Keep this code private` 체크 해제 → `Publish Repository`
+        7. **웹에서 정리 도구 켜기** — 브라우저에서 저장소 열기 → `Issues` → `Labels`(feat·bug·docs·perf), `Milestones`(M1~M6, 마감일 = 각 단계 마지막 주 일요일) → `Projects` → `New project` → Board
 - [ ] `구현` **[필수]** `AFloatingItem` 액터: StaticMesh 컴포넌트 + Tick에서 사인파 상하 이동·회전. 속도·높이는 `UPROPERTY(EditAnywhere)`로 노출
+    - 👣 **따라 하기: 첫 PR 해 보기**
+        1. **오늘이 첫 PR** — 이 과제를 끝내면 오늘 카드의 **기록 ① Push → ② PR** 순서로 생애 첫 PR을 만든다
+        2. **이슈 먼저 (선택)** — 브라우저에서 `UE5-ActionArena` → `Issues` → `New issue` → 제목 `AFloatingItem 액터 만들기` → `Submit new issue` → 번호(예: #1)를 PR 카드의 '이슈 번호'에 넣으면 합칠 때 이슈가 자동으로 닫힌다
+        3. **이후 규칙** — 앞으로 과제를 끝낸 날마다 같은 순서로 PR을 남긴다. 올릴 변경이 없는 날은 카드의 '건너뛰기'
 - [ ] `구현` **[필수]** BP 자식 `BP_FloatingItem` 3개를 서로 다른 값으로 레벨에 배치 (프리팹 변형과 비교해 TIL에 기록)
 - [ ] `AI` **[필수]** AI가 만든 코드를 **한 줄도 빠짐없이 해설 주석**을 단 버전으로 다시 써서 학습 로그 저장소에 올리기 (레벨 L1)
 - [ ] `학습` **[필수]** 컴파일 에러 3종을 일부러 내고 읽기: 세미콜론 누락, 선언-정의 시그니처 불일치, `#include` 누락 → 에러 원문 + 내 해석을 TIL에 기록
-- [ ] `Git` **[필수]** 첫 PR: GitHub 웹에서 이슈 만들기 → 위쪽 **🛠 게임 작업 PR** 버튼의 순서대로 PR 열기 → 셀프 코멘트 → `Squash and merge` (이후 모든 기능을 이 흐름으로)
+- [ ] `Git` **[필수]** PR 흐름 점검: 이번 주 PR마다 셀프 코멘트가 있는지, 이슈·마일스톤(M1)이 연결됐는지 GitHub 웹에서 확인하고 빠진 것 채우기 (이후 모든 기능을 이 흐름으로)
 - [ ] `코테` **[필수]** 5문제(C++) 풀이·커밋
 - [ ] `기록` **[필수]** 매일 TIL + 주간 Devlog 1편 (부록 템플릿)
 
@@ -314,11 +379,11 @@ UHT(Unreal Header Tool)가 리플렉션용 코드를 자동 생성하고, 그 �
 ```
 
 **📅 요일별 계획** (날짜는 HTML의 '오늘 학습'에서 시작일을 정하면 계산됩니다)
-- Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 과제1 UE 프로젝트 ActionArena 생성(Blank, C++, Scalab… · 코테 · 자가 점검 · TIL
+- Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 과제1 UE 프로젝트 ActionArena 만들고 GitHub Desktop으로… · 코테 · 자가 점검 · TIL
 - Day 2 (화, 약 3시간): 과제2 AFloatingItem 액터 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 3 (수, 약 3시간): 과제3 BP 자식 BP_FloatingItem 3개를 서로 다른 값으로 레벨에 배… · 과제4 AI가 만든 코드를 한 줄도 빠짐없이 해설 주석을 단 버전으로 다시 써서… · 코테 · 커밋·Push · PR · TIL
 - Day 4 (목, 약 3시간): 과제5 컴파일 에러 3종을 일부러 내고 읽기 · 코테 · 자가 점검 · TIL
-- Day 5 (금, 약 3시간): 과제6 첫 PR · 코테 · 자가 점검 · 커밋·Push · PR · TIL
+- Day 5 (금, 약 3시간): 과제6 PR 흐름 점검 · 코테 · 자가 점검 · TIL
 - Day 6 (토, 약 5.5시간): 보충 · 이번 주 문서 다듬기 · TIL
 - Day 7 (일, 약 2.5시간): 주간 복습(자가 점검 전체) + 🔔 주간 Devlog
 
@@ -363,7 +428,12 @@ UHT(Unreal Header Tool)가 리플렉션용 코드를 자동 생성하고, 그 �
 
 **✅ 과제**
 - [ ] `학습` **[필수]** 순수 C++ 포인터 실험 3개(`clang++`로 터미널 컴파일): 값 전달 / 포인터 전달 / 참조 전달로 함수 안에서 값 바꾸기 + 주소 출력 → 지난번 C# `ref` TIL과 비교
-- [ ] `구현` **[필수]** `AGCLabActor`: `UPROPERTY` 있는 UObject 멤버와 없는 멤버를 하나씩 만들고 각각 `TWeakObjectPtr`로도 관찰 → 콘솔 `obj gc`로 강제 GC → 어느 쪽이 수거되는지 로그로 확인 (수거된 객체를 원시 포인터로 건드리면 크래시나 조용한 메모리 오염이 생긴다는 점까지 기록)
+- [ ] `구현` **[필수]** `AGCLabActor`로 'UPROPERTY가 없으면 GC가 지운다' 실험하기
+    - UObject 멤버 2개 만들기 — 하나는 `UPROPERTY()`를 붙이고, 하나는 붙이지 않는다
+    - 둘 다 `TWeakObjectPtr`로도 가리켜 둔다 (사라졌는지 관찰용)
+    - ▶ Play 중 콘솔(📍 메뉴 위치 참고)에 `obj gc` 입력 → GC를 강제로 실행
+    - `IsValid()` 결과를 로그로 찍어 어느 쪽이 사라졌는지 확인
+    - TIL에 '수거된 객체를 원시 포인터로 건드리면 크래시나 메모리 오염이 생긴다'까지 기록
 - [ ] `문서` **[필수]** **TS-001** 작성: 'UPROPERTY 누락 시 GC 수거' — 증상·재현·원인(도달성)·해결·재발 방지 (부록 템플릿)
 - [ ] `구현` **[필수]** `UPROPERTY` 지정자 놀이터: 지정자 10개를 붙여 디테일 패널·블루프린트에서 차이 확인 → 표로 정리
 - [ ] `구현` **[필수]** 프로젝트 로그 카테고리 정의(`DECLARE_LOG_CATEGORY_EXTERN`/`DEFINE_LOG_CATEGORY`) → 이후 모든 로그는 이 카테고리로
@@ -418,7 +488,7 @@ C#의 GC와 언리얼의 GC를 비교해서 설명해줘. 특히 UPROPERTY를 �
 - Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 과제1 순수 C++ 포인터 실험 3개(clang++로 터미널 컴파일) · 코테 · 자가 점검 · TIL
 - Day 2 (화, 약 3시간): 과제6 ObjectMacros.h에서 내가 쓴 지정자 3개의 원문 주석을 찾아 T… · 과제5 프로젝트 로그 카테고리 정의(DECLARE_LOG_CATEGORY_EXTE… · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 3 (수, 약 3시간): 과제4 UPROPERTY 지정자 놀이터 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
-- Day 4 (목, 약 3시간): 과제2 AGCLabActor · 코테 · 자가 점검 · 커밋·Push · PR · TIL
+- Day 4 (목, 약 3시간): 과제2 AGCLabActor로 'UPROPERTY가 없으면 GC가 지운다' 실험하기 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 5 (금, 약 3시간): 과제3 TS-001 작성 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 6 (토, 약 5.5시간): 보충 · 이번 주 문서 다듬기 · 자가 점검 · TIL
 - Day 7 (일, 약 2.5시간): 주간 복습(자가 점검 전체) + 🔔 주간 Devlog
@@ -567,7 +637,12 @@ AActor의 생명주기를 Unity MonoBehaviour와 표로 비교해줘. 1:1로 대
 | `Engine/Source/Runtime/Core/Public/Math/Vector.h` | `DotProduct`, `CrossProduct`, `operator\|`, `operator^` |
 
 **✅ 과제**
-- [ ] `구현` **[필수]** `AArenaCharacter`: SpringArm+Camera, 마네킹 메시(Add Feature or Content Pack → Third Person으로 확보), Enhanced Input으로 Move/Look/Jump 바인딩 (IA·IMC 에셋은 에디터에서 만들고 C++에선 `UPROPERTY`로 참조)
+- [ ] `구현` **[필수]** `AArenaCharacter` 만들기: 카메라 + 마네킹 + 이동·시점·점프
+    - `SpringArm`(카메라 붐) + `Camera` 컴포넌트 추가
+    - 마네킹 확보: 콘텐츠 브라우저 `+ Add` → `Add Feature or Content Pack…` → `Third Person` → `Add to Project`
+    - 입력 에셋 만들기: 콘텐츠 브라우저 빈 곳 우클릭 → `Input` → `Input Action` 3개(IA_Move·IA_Look·IA_Jump) + `Input Mapping Context` 1개
+    - C++에서 이 에셋들을 `UPROPERTY`로 받고 `BindAction`으로 함수에 연결
+    - BP 자식에서 에셋을 지정하고 ▶ Play로 이동·시점·점프 확인
 - [ ] `구현` **[필수]** Sprint(Shift 누르는 동안 `MaxWalkSpeed` 변경) — 수치는 UPROPERTY로 노출하고 `// TODO(W8): 데이터 에셋으로 이전` 주석
 - [ ] `구현` **[필수]** 방향 판정 디버그 액터: 플레이어 기준 대상이 앞/뒤(내적)·좌/우(외적)인지와 각도를 `DrawDebugLine`/`DrawDebugString`으로 표시 (W11 피격 방향 리액션에서 재사용)
 - [ ] `문서` **[필수]** 엔진 노트 `02-enhanced-input.md`: 키 → IMC → IA → Trigger → 바인딩 함수 흐름도 + 유니티 Input System 비교
@@ -617,7 +692,7 @@ Enhanced Input으로 이동/시점/점프를 C++로 바인딩하려고 해. 정�
 
 **📅 요일별 계획** (날짜는 HTML의 '오늘 학습'에서 시작일을 정하면 계산됩니다)
 - Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 코테 · 자가 점검 · TIL
-- Day 2 (화, 약 3시간): 과제1 AArenaCharacter · 코테 · 자가 점검 · 커밋·Push · PR · TIL
+- Day 2 (화, 약 3시간): 과제1 AArenaCharacter 만들기 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 3 (수, 약 3시간): 과제2 Sprint(Shift 누르는 동안 MaxWalkSpeed 변경) · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 4 (목, 약 3시간): 과제3 방향 판정 디버그 액터 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 5 (금, 약 3시간): 과제4 엔진 노트 02-enhanced-input.md · 코테 · 자가 점검 · 커밋·Push · PR · TIL
@@ -1527,7 +1602,11 @@ Engine(엔진 전체), Editor(에디터), GameInstance(게임 실행~종료, 레
 | `Engine/Source/Runtime/Engine/Private/ActorReplication.cpp` | 액터 복제 관련 구현 훑어보기(전부 이해하려 하지 않기) |
 
 **✅ 과제**
-- [ ] `구현` **[필수]** `L_NetLab` 맵 + 실험 4종: ① 복제되는 문(서버만 상태 변경, OnRep으로 클라 반영) ② Server RPC 버튼(소유 안 한 액터에서 호출 → 실패 로그 확인) ③ NetMulticast vs 복제 프로퍼티(늦게 들어온 클라 차이) ④ `COND_OwnerOnly` 변수
+- [ ] `구현` **[필수]** `L_NetLab` 실험 맵에서 네트워크 실험 4가지
+    - ① 복제되는 문: 서버만 상태를 바꾸고, `OnRep`으로 클라이언트 화면에 반영
+    - ② Server RPC 버튼: 내 것이 아닌 액터에서 호출하면 실패하는 로그 확인 (오너십)
+    - ③ NetMulticast vs 복제 변수: 늦게 들어온 클라이언트에게 무엇이 보이는지 비교
+    - ④ `COND_OwnerOnly` 변수: 주인에게만 복제되는지 확인
 - [ ] `구현` **[필수]** 모든 실험을 PIE 2인 + 네트워크 에뮬레이션(지연 150~200ms, 손실 5%)으로 확인
 - [ ] `문서` **[필수]** 엔진 노트 `05-network-basics.md`: '어떤 클래스가 어디에 존재하나' 표 + 'Server RPC → 상태 변경 → 복제 → OnRep' 시퀀스 다이어그램(Mermaid)
 - [ ] `문서` **[필수]** TS 1건: 네트워크 실험에서 예상과 달랐던 동작
@@ -1573,7 +1652,7 @@ AutonomousProxy: 내가 조종하는 내 폰(클라 측 사본). SimulatedProxy:
 
 **📅 요일별 계획** (날짜는 HTML의 '오늘 학습'에서 시작일을 정하면 계산됩니다)
 - Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 코테 · 자가 점검 · TIL
-- Day 2 (화, 약 3시간): 과제1 L_NetLab 맵 + 실험 4종 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
+- Day 2 (화, 약 3시간): 과제1 L_NetLab 실험 맵에서 네트워크 실험 4가지 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 3 (수, 약 3시간): 과제2 모든 실험을 PIE 2인 + 네트워크 에뮬레이션(지연 150~200ms,… · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 4 (목, 약 3시간): 과제3 엔진 노트 05-network-basics.md · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 5 (금, 약 3시간): 과제4 TS 1건 · 자가 점검 · 커밋·Push · PR · TIL
@@ -2207,10 +2286,10 @@ check: 실패 시 크래시, Shipping에선 기본적으로 식 자체가 제거
 ```
 
 **📅 요일별 계획** (날짜는 HTML의 '오늘 학습'에서 시작일을 정하면 계산됩니다)
-- Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 과제1 시연 영상 2~3분 제작 (자막으로 기술명 표기, 디버그 시각화 장면 포함) · 자가 점검 · 커밋·Push · PR · TIL
+- Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 과제1 시연 영상 2~3분 제작 (자막으로 기술명 표기, 디버그 시각화 장면 포함) · 자가 점검 · TIL
 - Day 2 (화, 약 3시간): 과제2 README 최종본 + 같은 기능의 진화 표 + 기술적 도전 Top 3 · 커밋·Push · PR · TIL
-- Day 3 (수, 약 3시간): 과제3 이어서(오늘 분량) · 커밋·Push · TIL
-- Day 4 (목, 약 3시간): 과제3 기술 포트폴리오 PDF 15~20쪽 · 커밋·Push · PR · TIL
+- Day 3 (수, 약 3시간): 과제3 이어서(오늘 분량) · TIL
+- Day 4 (목, 약 3시간): 과제3 기술 포트폴리오 PDF 15~20쪽 · TIL
 - Day 5 (금, 약 3시간): 과제4 GitHub 프로필 README, 고정 저장소, 학습 로그 저장소 인덱스(… · TIL
 - Day 6 (토, 약 5.5시간): 과제5 현직자·커뮤니티 1명 이상에게 피드백 받기 → 반영 · 코테 · TIL
 - Day 7 (일, 약 2.5시간): 주간 복습(자가 점검 전체) + 🔔 주간 Devlog
@@ -2543,9 +2622,9 @@ unreal-study-log/                ← 학습 로그 + 이 커리큘럼 (~/Project
 
 **첫 PR 해 보기**
 
-1. **이슈 만들기** — 브라우저에서 `UE5-ActionArena` → `Issues` → `New issue` → 제목 `AFloatingItem 액터 만들기` → `Submit new issue` (번호를 기억, 예: #1)
-2. **PR 따라 하기** — 위쪽 **🛠 게임 작업 PR** 버튼을 눌러 카드 순서대로 진행 — 이슈 번호를 넣으면 PR이 합쳐질 때 이슈가 자동으로 닫힌다
-3. **이후 규칙** — 앞으로 기능 하나가 완성될 때마다 같은 순서로 PR을 남긴다
+1. **오늘이 첫 PR** — 이 과제를 끝내면 오늘 카드의 **기록 ① Push → ② PR** 순서로 생애 첫 PR을 만든다
+2. **이슈 먼저 (선택)** — 브라우저에서 `UE5-ActionArena` → `Issues` → `New issue` → 제목 `AFloatingItem 액터 만들기` → `Submit new issue` → 번호(예: #1)를 PR 카드의 '이슈 번호'에 넣으면 합칠 때 이슈가 자동으로 닫힌다
+3. **이후 규칙** — 앞으로 과제를 끝낸 날마다 같은 순서로 PR을 남긴다. 올릴 변경이 없는 날은 카드의 '건너뛰기'
 
 `.gitattributes` 내용 (게임 저장소를 만들기 전에 프로젝트 폴더에 넣기):
 ```gitattributes
@@ -2575,8 +2654,9 @@ unreal-study-log/                ← 학습 로그 + 이 커리큘럼 (~/Project
 3. **내용 붙이기** — 제목 칸에 PR 제목, 본문 칸에 PR 본문을 붙여넣기 → GIF·영상 파일을 본문에 끌어다 놓기
 4. **만들기** — 초록색 `Create pull request` 클릭
 5. **셀프 리뷰** — PR 화면 `Files changed` 탭 → 설명하고 싶은 코드 줄 번호 옆 `+` → 왜 이렇게 했는지 한두 줄 → `Add single comment`
-6. **합치기** — `Conversation` 탭 아래 `Squash and merge` → `Confirm squash and merge` → `Delete branch`
-7. **내 컴퓨터 정리** — GitHub Desktop `Current Branch` → `main` → `Fetch origin` → `Pull origin`
+6. **합치는 방식 고르기** — `Conversation` 탭 아래 초록 버튼 오른쪽 **▾** → `Squash and merge` 선택 (한 번 고르면 다음부터 기본값이 된다)
+7. **합치기** — `Squash and merge` → `Confirm squash and merge` → 보라색 `Merged`가 뜨면 `Delete branch`
+8. **내 컴퓨터 정리** — GitHub Desktop `Current Branch` → `main` → `Fetch origin` → `Pull origin` → 메뉴 `Branch` → `Delete…`로 방금 쓴 작업 브랜치 지우기 (다음 날은 새 브랜치에서 시작)
 
 ### 매일: TIL 올리기
 
@@ -3056,7 +3136,7 @@ perf(ai): BTService 주기 0.1s → 0.25s, 적 100마리 기준 게임 스레드
 ````
 
 ### 월간 회고 (docs/retro/M1.md)
-Git 기록 가이드의 생성기 '월간 회고' 모드를 쓰면 관문 체크 상태까지 채워진 초안이 만들어진다.
+🔔 알림의 '월간 회고'를 열면 관문 체크 상태까지 채워진 초안을 받을 수 있다.
 
 ````markdown
 # M1 회고 (W1~W4)
@@ -3192,6 +3272,71 @@ Devlog · Troubleshooting · ADR · Engine Notes · Known Issues
 | Profiler | Unreal Insights · stat 명령 |
 | Debug.Log · Gizmos | UE_LOG · DrawDebugHelpers |
 | Assembly Definition | 모듈(.Build.cs) |
+
+### 언리얼 에디터 메뉴 위치 (UE 5.8 기준)
+
+| 기능 | 어디에 있나 |
+|---|---|
+| **콘솔 명령 입력** | ▶ Play 중 `` ` `` 키(숫자 1 왼쪽). **한글 입력 상태면 ₩가 입력되며 열리지 않는다** → 영문 입력으로 바꾸고 누르기. 또는 메뉴 `Window` → `Output Log` 아래쪽 `Cmd` 칸에 입력 |
+| **Editor Preferences** | 에디터 창 왼쪽 위 메뉴 `Edit` → `Editor Preferences` → 위쪽 검색창에 설정 이름 입력 |
+| **Project Settings** | 메뉴 `Edit` → `Project Settings` (콜리전 채널: `Engine` → `Collision`, 기본 맵·GameMode: `Project` → `Maps & Modes`) |
+| **화질(Scalability)** | 뷰포트 위쪽 툴바의 계기판(속도계) 아이콘 → Scalability. UE 5.5 이전은 오른쪽 위 `Settings` |
+| **콘텐츠 팩 추가** | 콘텐츠 브라우저 `+ Add` → `Add Feature or Content Pack…` → `Third Person` → `Add to Project` |
+| **C++ 클래스 만들기** | 메뉴 `Tools` → `New C++ Class…` → 부모 클래스 선택 → 이름 → `Create Class` (끝나면 에디터를 닫고 Rider에서 빌드) |
+| **BP 자식 만들기** | 콘텐츠 브라우저 `C++ Classes` 폴더에서 내 클래스 우클릭 → `Create Blueprint class based on …` |
+| **입력 에셋** | 콘텐츠 브라우저 빈 곳 우클릭 → `Input` → `Input Action` / `Input Mapping Context` |
+| **Animation Blueprint · Blend Space** | 콘텐츠 브라우저 우클릭 → `Animation` → `Animation Blueprint`(부모로 내 AnimInstance 선택) / `Blend Space` |
+| **몽타주 · 노티파이** | 애니메이션 시퀀스 우클릭 → `Create` → `Create AnimMontage`. 노티파이는 몽타주 창 아래 `Notifies` 줄 우클릭 → `Add Notify State` |
+| **DataAsset · DataTable** | 콘텐츠 브라우저 우클릭 → `Miscellaneous` → `Data Asset`(내 클래스 선택) / `Data Table`(행 구조체 선택). CSV는 콘텐츠 브라우저로 끌어다 놓으면 가져오기 창이 뜬다 |
+| **Behavior Tree · Blackboard** | 콘텐츠 브라우저 우클릭 → `Artificial Intelligence` → `Behavior Tree` / `Blackboard` |
+| **NavMesh** | 툴바 `+`(Quickly add to the project) → `Volumes` → `Nav Mesh Bounds Volume`를 바닥 크기에 맞추기 → 뷰포트에서 `P` 키로 초록 영역 확인 |
+| **Gameplay Debugger** | ▶ Play 중 `'`(작은따옴표) 키 → 숫자 키로 카테고리 켜고 끄기 |
+| **Visual Logger** | 메뉴 `Tools` → `Debug` → `Visual Logger` → 녹화(●)를 켜고 Play |
+| **Size Map · Reference Viewer** | 콘텐츠 브라우저에서 에셋 우클릭 → `Size Map…` / `Reference Viewer…` |
+| **Unreal Insights** | 메뉴 `Tools` → `Run Unreal Insights` (또는 화면 오른쪽 아래 `Trace` 메뉴). 버전에 따라 위치가 조금 다르다 |
+| **2인 멀티 Play** | 툴바 ▶ Play 옆 `⋮` → `Number of Players` = 2, `Net Mode` = `Play As Listen Server` |
+| **네트워크 에뮬레이션** | `Edit` → `Editor Preferences` → `Level Editor` → `Play` → `Multiplayer Options` → `Enable Network Emulation` (지연·손실 값 입력) |
+| **플러그인 켜기** | 메뉴 `Edit` → `Plugins` → 검색 → 체크 → 에디터 재시작 |
+| **패키징** | 툴바 `Platforms` → `Mac` → `Package Project` (Shipping은 같은 메뉴의 `Binary Configuration`에서 선택) |
+| **자동화 테스트 실행** | 메뉴 `Tools` → `Session Frontend` → `Automation` 탭 (또는 `Tools` → `Test Automation`) |
+| **World Settings** | 메뉴 `Window` → `World Settings` (이 레벨에서 쓸 GameMode 지정) |
+
+### 용어집
+
+| 용어 | 뜻 |
+|---|---|
+| **핫픽스** | 큰 버전(5.8) 안에서 버그만 고친 작은 업데이트(5.8.1, 5.8.2…). 가장 높은 번호를 쓰면 된다. |
+| **콜스택** | 지금 이 줄에 오기까지 어떤 함수가 어떤 순서로 불렸는지 쌓인 목록. 중단점에서 멈추면 보인다. |
+| **중단점 (Breakpoint)** | '이 줄에서 멈춰라' 표시. 멈춘 상태에서 변수 값과 콜스택을 볼 수 있다. |
+| **디버그 실행** | 디버거를 붙여 실행하는 것. 중단점에서 멈추려면 Rider의 벌레(Debug) 버튼으로 실행해야 한다. |
+| **빌드 · 컴파일** | 내가 쓴 C++ 코드를 컴퓨터가 실행할 수 있는 파일로 바꾸는 과정. |
+| **링크 에러** | 선언(.h)은 있는데 정의(.cpp의 함수 본문)를 못 찾을 때 나는 에러. |
+| **헤더 · 소스** | `.h`는 '무엇이 있는지'(선언), `.cpp`는 '어떻게 동작하는지'(정의). |
+| **IDE** | 코드 편집·빌드·디버깅을 한 곳에서 하는 프로그램 (Rider, Xcode, Visual Studio). |
+| **인덱싱** | Rider가 엔진·프로젝트 코드를 미리 읽어 목록을 만드는 과정. 끝나야 자동완성·검색이 빠르다. |
+| **터미널 · sudo** | 터미널은 글자로 명령을 입력하는 맥 앱. `sudo`는 '관리자 권한으로 실행'이라 맥 비밀번호를 묻고, 입력해도 화면에 안 보인다. |
+| **Live Coding** | 에디터를 켠 채 C++ 일부를 다시 컴파일하는 기능. 맥에서는 기대하지 말고 '종료 → 빌드 → 재실행'을 쓴다. |
+| **실행 구성** | Rider 위쪽에서 '무엇을 어떤 모드로 실행할지' 고르는 칸. 보통 `Development Editor`. |
+| **PIE** | Play In Editor — 에디터 안에서 ▶ Play로 게임을 바로 실행해 보는 것. |
+| **뷰포트 · 콘텐츠 브라우저** | 뷰포트는 가운데 3D 화면(유니티 Scene 뷰), 콘텐츠 브라우저는 아래쪽 에셋 목록(유니티 Project 창). |
+| **레벨 (맵)** | 게임의 한 장면 (유니티 Scene). |
+| **블루프린트 (BP)** | 언리얼의 시각적 스크립트. 이 과정에서는 주로 'C++ 부모의 값만 바꾼 자식 클래스'로 쓴다(유니티 프리팹 변형처럼). |
+| **액터 · 컴포넌트** | 액터는 레벨에 놓을 수 있는 모든 것(유니티 GameObject), 컴포넌트는 액터에 붙이는 기능 조각(유니티 MonoBehaviour). |
+| **CDO** | 클래스마다 엔진이 만들어 두는 '기본값 견본 객체'. 새 객체는 이 값을 복사해서 시작한다. |
+| **리플렉션** | 엔진이 내 클래스의 변수·함수 목록을 알 수 있게 하는 장치. `UCLASS`·`UPROPERTY`·`UFUNCTION`이 그 표시다. |
+| **GC (가비지 컬렉션)** | 안 쓰는 객체를 엔진이 자동으로 지우는 기능. 언리얼은 `UPROPERTY`로 연결된 객체만 '쓰는 중'으로 본다. |
+| **UPROPERTY** | 변수를 엔진에 등록하는 표시. 에디터 노출·저장·GC 보호가 여기서 정해진다. |
+| **포인터 · 참조** | 포인터(`*`)는 객체의 '주소'를 담는 변수, 참조(`&`)는 기존 객체의 '다른 이름'. C#의 참조 타입이 자동으로 해 주던 일을 직접 표시한다. |
+| **Tick** | 매 프레임 불리는 함수 (유니티 Update). 많이 쓰면 느려진다. |
+| **델리게이트** | '이 일이 생기면 알려줘' 연결 장치 (C# event · Action). |
+| **몽타주 · 노티파이** | 몽타주는 공격처럼 원할 때 재생하는 애니메이션 묶음, 노티파이는 애니메이션 특정 시점에 보내는 신호(유니티 Animation Event). |
+| **DataAsset · DataTable** | 수치를 코드 밖 에셋으로 빼는 방법. DataAsset은 객체 하나(유니티 ScriptableObject), DataTable은 표(CSV). |
+| **리플리케이션 · RPC** | 리플리케이션은 서버의 값을 클라이언트에 자동 복사하는 것, RPC는 다른 컴퓨터의 함수를 부르는 것. |
+| **리슨 서버** | 한 플레이어의 게임이 서버 역할도 같이 하는 멀티플레이 방식. |
+| **GAS** | Gameplay Ability System — 스킬·버프·스탯을 만드는 언리얼 공식 프레임워크. |
+| **Git LFS** | `.uasset` 같은 큰 파일을 Git과 따로 보관하는 확장 기능. |
+| **브랜치 · 커밋 · Push** | 브랜치는 작업용 분기, 커밋은 세이브 포인트, Push는 GitHub에 올리기. |
+| **PR · 머지** | PR은 '이 분기를 main에 합칠게요' 작업 보고서, 머지는 실제로 합치는 것. |
 
 ### C# → C++ 대응표
 
