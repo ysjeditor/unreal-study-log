@@ -26,7 +26,7 @@
 | **대상** | C#(클래스·인터페이스·배열) + 유니티(프리팹·애니메이션) 경험 2개월, C/C++ 경험 없음 |
 | **기간** | 24주 커리큘럼 + 버퍼 2주 = 26주(약 6개월), 시작 전 0주차 3~5일 |
 | **시간** | 주 22~25시간 기준 (평일 2.5시간 + 주말 5시간 + 매일 코테 30분). 시간이 적으면 '필수'만 |
-| **환경** | UE 5.8 · macOS(Apple Silicon) · Rider · GitHub Desktop(LFS) — Windows도 동일하게 진행 가능 |
+| **환경** | UE 5.8 · Windows 11 · Visual Studio 2026 · GitHub Desktop(LFS) |
 | **최종 산출물** | 2인 협동 액션 웨이브 서바이벌 프로토타입(C++/GAS/멀티) + 시연 영상 + 기술 포트폴리오 PDF + 6개월 학습 기록 저장소 |
 
 ### 이 과정의 'AI 지름길' 전략
@@ -70,9 +70,9 @@
 ### 현실 체크
 - **일정은 도전적이다.** 주 22~25시간 기준이다. 시간이 부족하면 '필수'만 하고, 그래도 밀리면 W13의 v0.3.0(싱글 MVP)을 1차 포트폴리오로 지원을 시작하고 이후 단계는 병행한다.
 - **AI 지름길의 한계를 인정한다.** 코딩테스트·기술 면접·과제 전형에는 AI가 없다. 그래서 매주 C++ 생존 문법, 매일 코테, 매달 AI-Off 챌린지를 둔다.
-- **맥은 학습엔 충분하지만 업계 표준은 Windows + Visual Studio(+Perforce)다.** 과제 전형·입사 후 환경을 고려해 W13~W19 사이 한 번은 Windows에서 빌드해 보면 좋다. 평가자 대부분이 Windows라 맥 빌드는 실행하기 어려우므로 **영상이 1순위 전달 수단**이다.
-- **16GB 맥은 공식 최소 사양이다.** Scalable 설정·불필요한 앱 종료·짧은 PIE 세션으로 버티고, 무거운 에셋(메가스캔·고해상도 환경)은 쓰지 않는다.
-- **버전 정보는 바뀐다.** Xcode 호환성, 플러그인 상태 같은 사실은 설치·사용 직전에 공식 문서로 재확인한다(이 문서 작성일: 2026-11-25).
+- **Windows + Visual Studio는 업계 표준 환경과 같다.** 과제 전형·입사 후 환경과 거의 같고, 패키징한 Windows 빌드를 평가자가 바로 실행해 볼 수 있다. 그래도 **영상이 1순위 전달 수단**이다.
+- **PC 사양을 먼저 확인한다.** 공식 권장은 RAM 32GB · 그래픽 메모리 8GB 이상이다. 그보다 낮으면 Scalable 설정·불필요한 앱 종료·짧은 PIE 세션으로 버티고, 무거운 에셋(메가스캔·고해상도 환경)은 쓰지 않는다.
+- **버전 정보는 바뀐다.** Visual Studio·MSVC 버전 호환성, 플러그인 상태 같은 사실은 설치·사용 직전에 공식 문서로 재확인한다(이 문서 작성일: 2026-11-25).
 
 ### 학원·스터디에서 이 문서를 쓰는 법
 - **주 1회 1:1 리뷰(30분)** — 그 주 PR 1개를 함께 보고, 해당 주차 자가 점검 질문 3개를 무작위로 묻는다.
@@ -166,7 +166,7 @@
 ## 3. 주차별 커리큘럼
 
 > 과제 표기: **[필수]** 시간이 부족해도 반드시 / **[심화]** 여유가 있을 때. 모든 주차(W01~)에는 공통 과제 2개(코테, TIL·Devlog)가 추가된다.  
-> 엔진 소스 경로 안내: 경로는 UE 5.8 기준 안내다. 버전에 따라 위치가 바뀔 수 있으니 Rider의 파일 검색(⇧⌘O)에 파일명만 넣어 찾는다. 읽는 순서: ① 헤더(.h)의 주석과 선언만 → ② 궁금한 함수 하나만 .cpp에서 → ③ 중단점으로 실제 호출 확인.
+> 엔진 소스 경로 안내: 경로는 UE 5.8 기준 안내다. 버전에 따라 위치가 바뀔 수 있으니 Visual Studio의 `Ctrl+T`(모두 이동)에 파일명만 넣어 찾는다. 읽는 순서: ① 헤더(.h)의 주석과 선언만 → ② 궁금한 함수 하나만 .cpp에서 → ③ 중단점으로 실제 호출 확인.
 
 ### 0주차 · 사전 준비
 
@@ -174,16 +174,17 @@
 
 #### W00 · 개발 환경 & 포트폴리오 저장소 세팅 (3~5일 · W1 시작 전)
 
-> 🎯 **목표:** M4 맥북에서 UE 5.8 C++ 프로젝트를 빌드·디버깅할 수 있고, 학습 기록이 GitHub에 쌓이기 시작한 상태를 만든다.
+> 🎯 **목표:** Windows PC에서 UE 5.8 C++ 프로젝트를 빌드·디버깅할 수 있고, 학습 기록이 GitHub에 쌓이기 시작한 상태를 만든다.
 
 **핵심 개념**
 - **버전 고정:** UE 5.8(2026-06 정식 출시, 작성 시점 최신 정식)의 최신 핫픽스를 설치하고 6개월간 바꾸지 않는다. 5.9는 Preview(2026-11)라 포트폴리오에 쓰지 않는다. UE6 소식이 나와도 흔들리지 않는다.
-- **macOS 공식 요구사항(UE 5.8):** macOS Sonoma 14.5 이상, Xcode 26.0 이상(권장 **26.1.1**), **Xcode 26.4는 비호환**으로 명시. 메모리 최소 16GB·권장 32GB → 16GB 맥은 가벼운 설정이 필수다.
-- **Mac 빌드 루프:** Live Coding에 기대지 말고 'Rider에서 에디터 실행(디버거 연결) → 코드 수정 → 에디터 종료 → 빌드 → 재실행'을 기본 루프로 삼는다. 헤더(.h)를 바꾸면 어떤 플랫폼이든 재시작이 안전하다.
-- **엔진 소스는 이미 내 컴퓨터에 있다:** 런처로 설치한 엔진에도 `Engine/Source`가 포함돼 Rider의 Go to Definition(⌘B)·파일 검색(⇧⌘O)으로 바로 읽힌다. GitHub `EpicGames/UnrealEngine` 접근은 웹 검색·blame용 선택 사항.
+- **Windows 공식 요구사항(UE 5.8):** Windows 10 22H2 이상(권장 Windows 11). 개발 도구는 **Visual Studio 2026(18.0 이상)** 권장, VS 2022(17.14 이상)도 지원. 권장 사양은 쿼드코어 2.5GHz · **RAM 32GB** · 그래픽 메모리 8GB 이상 — 사양이 낮으면 가벼운 설정이 필수다.
+- **Windows 빌드 루프:** `.cpp` 함수 안쪽만 고쳤다면 에디터를 켠 채 **Live Coding**(`Ctrl+Alt+F11` 또는 에디터 오른쪽 아래 Compile 버튼). 헤더(.h)·`UPROPERTY`·생성자를 바꿨다면 **에디터 종료 → Visual Studio에서 F5**로 다시 실행한다.
+- **엔진 소스는 이미 내 컴퓨터에 있다:** 런처로 설치한 엔진에도 `Engine/Source`가 포함돼 Visual Studio에서 **F12(정의로 이동)**·**Ctrl+T(파일·심볼 검색)**로 바로 읽힌다. GitHub `EpicGames/UnrealEngine` 접근은 웹 검색·blame용 선택 사항.
+- **경로 규칙:** 프로젝트는 `C:\Projects`처럼 **짧은 영문 경로**에 둔다. 한글이 들어간 경로와 OneDrive가 동기화하는 바탕화면·문서 폴더는 빌드 에러와 동기화 충돌의 흔한 원인이다.
 
 **유니티/C#에서 건너오기**
-- 유니티 허브 + Visual Studio ↔ Epic Games Launcher + Rider(Xcode 툴체인 사용)
+- 유니티 허브 + Visual Studio ↔ Epic Games Launcher + Visual Studio (유니티 때와 같은 VS에 C++ 게임 개발 워크로드만 추가)
 - 유니티에서 `Library/`·`Temp/`를 커밋하지 않듯, 언리얼은 `Binaries/`·`Intermediate/`·`Saved/`·`DerivedDataCache/`를 커밋하지 않는다.
 
 **✅ 과제**
@@ -193,60 +194,61 @@
         2. **언리얼 화면으로** — 런처 왼쪽 메뉴 `Unreal Engine` → 위쪽 `Library`(라이브러리) 탭
         3. **버전 추가** — `ENGINE VERSIONS` 옆 노란 `+` 버튼 → 새로 생긴 칸의 버전 숫자 ▾ → **5.8.x 중 가장 높은 번호** 선택 → `Install`
         4. **위치·옵션** — 설치 위치는 기본값 그대로 → `Options`에 'Editor symbols for debugging'(디버깅용 기호)이 보이면 체크. 용량이 커지지만 엔진 내부까지 콜스택을 볼 수 있다
-        5. **기다리는 동안** — 수십 GB라 **몇 시간** 걸릴 수 있다. 전원을 연결하고, 받는 동안 다음 과제(Xcode)를 같이 진행
+        5. **기다리는 동안** — 수십 GB라 **몇 시간** 걸릴 수 있다. 전원을 연결하고, 받는 동안 다음 과제(Visual Studio 설치)를 같이 진행. 디스크 여유는 100GB 이상(SSD 권장)
         6. **확인** — `Library`의 5.8 칸에 `Launch` 버튼이 보이면 완료 (지금 실행하지 않아도 된다)
-- [ ] `환경` **[필수]** **Xcode 26.1.1** 설치하고 언리얼이 쓰도록 고르기
-    - 👣 **따라 하기: Xcode 26.1.1 설치하고 언리얼이 쓰도록 고르기**
-        1. **왜 하나요?** — UE 5.8은 Xcode **26.1.1**을 권장하고 26.4 이상은 맞지 않는다고 공식 문서에 적혀 있다. 지금 맥에 있는 Xcode는 지우지 말고 **하나 더 나란히** 설치한다
-        2. **내려받기** — 브라우저에서 `developer.apple.com/download/all` → Apple ID로 로그인 → 검색창에 `Xcode 26.1.1` → `Xcode_26.1.1.xip` 다운로드 (10GB 안팎)
-        3. **압축 풀기** — 다운로드 폴더의 `.xip`을 더블클릭 → `Xcode.app`이 생기면 이름을 `Xcode_26.1.1.app`으로 바꾸고 → Finder의 `응용 프로그램` 폴더로 끌어다 놓기
-        4. **터미널 열기** — ⌘ + Space(Spotlight) → `터미널` 입력 → 엔터. 글자로 명령을 입력하는 맥 기본 앱이다
-        5. **Xcode 고르기** — 아래 명령을 복사해 터미널에 붙여넣고 엔터 → `Password:`가 나오면 **맥 로그인 비밀번호** 입력 후 엔터 (입력해도 화면에 아무것도 안 보이는 게 정상)  `sudo xcode-select -s /Applications/Xcode_26.1.1.app`
-        6. **확인** — 아래 명령을 붙여넣고 엔터 → `/Applications/Xcode_26.1.1.app/Contents/Developer`가 나오면 성공  `xcode-select -p`
-        7. **처음 한 번 실행** — `응용 프로그램`에서 `Xcode_26.1.1`을 열고 라이선스 `Agree` → 추가 구성요소 `Install`이 끝나면 Xcode는 닫아도 된다
-- [ ] `환경` **[필수]** **Rider** 설치 + 비상업 무료 라이선스
-    - 👣 **따라 하기: Rider 설치 · 비상업 무료 라이선스**
-        1. **내려받기** — jetbrains.com/rider/download → macOS **Apple Silicon** 버전 `.dmg` 받기 → 열어서 Rider 아이콘을 `Applications`로 끌어다 놓기
-        2. **라이선스** — Rider 첫 실행 → 라이선스 창에서 **Non-commercial use(비상업적 사용)** 선택 → JetBrains 계정으로 로그인(없으면 만들기) → 약관 동의 → `Start Non-Commercial Use`. 놓쳤다면 메뉴 `Help` → `Manage Licenses…`
-        3. **처음 설정** — 테마·키맵 묻는 화면은 기본값으로 `Next`/`Skip` (나중에 바꿀 수 있다)
-        4. **다음 단계** — 언리얼 프로젝트와 연결(RiderLink)은 다음 과제 '연습 프로젝트 Sandbox'에서 한다
-- [ ] `환경` **[필수]** 에디터를 가볍게 설정하기 (16GB 맥용)
-    - 👣 **따라 하기: 에디터를 가볍게 만들기 (16GB 맥)**
-        1. **프로젝트 만들 때** — 프로젝트 브라우저 `Games` → `Blank` → 오른쪽 옵션: `C++` · Target Platform `Desktop` · Quality Preset **`Scalable`** · `Starter Content` 체크 해제
-        2. **화질 낮추기** — 에디터 뷰포트 위쪽 툴바의 **계기판(속도계) 아이콘** → Scalability 항목에서 `Medium`(맥이 뜨거우면 `Low`). UE 5.5 이전은 오른쪽 위 `Settings` 메뉴에 있다
+- [ ] `환경` **[필수]** **Visual Studio 2026** 설치 (C++ 게임 개발 워크로드)
+    - 👣 **따라 하기: Visual Studio 2026 설치 (C++ 게임 개발)**
+        1. **왜 하나요?** — 언리얼 C++ 코드를 컴파일·디버깅하는 도구. UE 5.8 공식 문서는 일반 개발에 **Visual Studio 2026(18.0 이상)**을 권장한다(VS 2022 17.14 이상도 지원). 무료인 **Community** 버전이면 된다
+        2. **내려받기** — visualstudio.microsoft.com → `Community` 다운로드 → 받은 설치 파일 실행 → **Visual Studio Installer**가 열린다
+        3. **워크로드 고르기** — `워크로드`(Workloads) 탭에서 체크: **C++를 사용한 게임 개발**(Game development with C++) · **C++를 사용한 데스크톱 개발**(Desktop development with C++) · **.NET 데스크톱 개발**(.NET desktop development)
+        4. **구성 요소 확인** — 오른쪽 `설치 세부 정보`의 게임 개발 항목 아래 **C++ profiling tools**, **C++ AddressSanitizer**, **Windows 11 SDK(10.0.26100 이상)**, **Unreal Engine 관련 도구**(IDE support · Test Adapter)가 체크돼 있는지 확인. 'Unreal Engine installer'는 런처를 이미 깔았으면 꺼도 된다
+        5. **설치** — `설치` → 용량이 커서 30분~1시간 걸린다 → 끝나면 재부팅
+        6. **기억해 둘 것** — UE 5.8 공식 권장 컴파일러는 **MSVC 14.50**이다. 나중에 빌드가 MSVC 버전 경고·에러로 실패하면 Installer → `수정` → `개별 구성 요소`에서 'MSVC v14.50' 빌드 도구를 추가로 설치
+- [ ] `환경` **[필수]** Visual Studio를 언리얼용으로 설정하기
+    - 👣 **따라 하기: Visual Studio를 언리얼용으로 설정**
+        1. **처음 실행** — Visual Studio 실행 → Microsoft 계정 로그인은 선택(`나중에`) → 개발 설정은 `Visual C++`, 테마는 원하는 것
+        2. **오류 목록 자동 표시 끄기** — 메뉴 `도구`(Tools) → `옵션`(Options) → `프로젝트 및 솔루션` → '빌드가 오류와 함께 끝나면 항상 오류 목록 표시' **체크 해제** — 언리얼의 진짜 에러는 `출력`(Output) 창에 나온다
+        3. **IntelliSense 설정** — 같은 `옵션` → `텍스트 편집기` → `C/C++` → `고급`(Advanced)에서 '외부 종속성 폴더 사용 안 함'을 True, `IntelliSense`에서 '64비트 IntelliSense 사용' 켜기
+        4. **툴바 넓히기(선택)** — 위쪽 `Development Editor`가 보이는 칸이 좁으면 툴바 끝 ▾ → `단추 추가 또는 제거`에서 솔루션 구성 칸 너비를 넓히기
+        5. **다음 단계** — 언리얼 프로젝트와 연결은 다음 과제 '연습 프로젝트 Sandbox'에서 한다
+- [ ] `환경` **[필수]** 에디터를 가볍게 설정하기 (PC 사양이 낮을 때 특히)
+    - 👣 **따라 하기: 에디터를 가볍게 만들기 (PC 사양이 낮을 때 특히)**
+        1. **프로젝트 만들 때** — 프로젝트 브라우저 `Games` → `Blank` → 오른쪽 옵션: `C++` · Target Platform `Desktop` · Quality Preset `Scalable` · `Starter Content` 체크 해제
+        2. **화질 낮추기** — 에디터 뷰포트 위쪽 툴바의 **계기판(속도계) 아이콘** → Scalability 항목에서 `Medium`(느리면 `Low`). UE 5.5 이전은 오른쪽 위 `Settings` 메뉴에 있다
         3. **뒤에 있을 때 CPU 줄이기** — 에디터 창 왼쪽 위 메뉴 `Edit` → `Editor Preferences` → 위쪽 검색창에 `Use Less CPU` → `Use Less CPU when in Background` 체크
         4. **작업 습관** — 에디터를 쓸 땐 브라우저 탭·다른 앱을 줄이고, ▶ Play는 짧게 확인하고 ■ Stop
-- [ ] `환경` **[필수]** 연습 프로젝트 `Sandbox`로 '빌드 → 중단점' 해 보기 (커밋 안 함)
-    - 👣 **따라 하기: 연습 프로젝트로 '빌드 → 중단점' 해 보기**
-        1. **프로젝트 만들기** — 런처 `Unreal Engine` → `Library` → 5.8 `Launch` → 프로젝트 브라우저 `Games` → `Blank` → `C++`·`Desktop`·`Scalable`·Starter Content 해제 → 위치 `Projects` · 이름 `Sandbox` → `Create` (첫 컴파일에 몇 분 걸린다)
-        2. **C++ 클래스 만들기** — 에디터 메뉴 `Tools` → `New C++ Class…` → `Actor` 선택 → 이름 `MyActor` → `Create Class` → 완료되면 에디터를 닫는다
-        3. **Rider로 열기** — Rider Welcome 화면 `Open` → `Projects/Sandbox/Sandbox.uproject` 선택 → `Open`
-        4. **RiderLink 설치** — 오른쪽 아래에 RiderLink 설치 알림이 뜨면 **`Game`**(이 프로젝트에만) 쪽 선택 → 끝날 때까지 기다리기. 놓쳤다면 `Rider` 메뉴 → `Settings…` → Languages & Frameworks → Unreal Engine
-        5. **인덱싱 기다리기** — 처음엔 엔진 코드를 읽느라 오른쪽 아래 진행 막대가 한참 돈다. 끝나야 자동완성·정의로 이동(⌘B)이 빠르다
-        6. **코드 한 줄** — 왼쪽 파일 목록에서 `MyActor.cpp` 열기 → `BeginPlay()` 안 `Super::BeginPlay();` 바로 아랫줄에 아래 코드 붙여넣기  `UE_LOG(LogTemp, Warning, TEXT("Hello Unreal from C++!"));`
-        7. **중단점 찍기** — 방금 붙인 줄의 **줄 번호 왼쪽 빈칸**을 클릭 → 빨간 점이 생기면 중단점('이 줄에서 멈춰라')
-        8. **디버그 실행** — Rider 위쪽 실행 구성이 `Sandbox` · `Development Editor`인지 확인 → 옆의 **벌레 모양(Debug) 버튼** 클릭 → 빌드가 끝나면 언리얼 에디터가 뜬다
-        9. **멈추는지 확인** — 콘텐츠 브라우저 `C++ Classes` 폴더의 `MyActor`를 레벨로 끌어다 놓기 → 위쪽 ▶ `Play` → Rider가 앞으로 나오며 그 줄에서 멈추고 아래 `Debug` 창에 콜스택(호출 순서)이 보이면 성공 → Rider의 ▶ `Resume`으로 계속
-        10. **앞으로의 빌드 루프** — C++를 고칠 때마다 ① 에디터 종료(또는 Rider 빨간 ■ Stop) → ② 코드 수정 → ③ 다시 벌레 버튼으로 실행. 맥에서는 Live Coding에 기대지 않는다. 헤더(.h)를 고쳤다면 특히 꼭 재시작
-        11. **시간 기록** — Rider 아래 `Build` 창에 나온 빌드 시간을 TIL에 적어 두기 (나중에 비교 기준)
+- [ ] `환경` **[필수]** 연습 프로젝트 `Sandbox`로 '빌드 → 중단점 → Live Coding' 해 보기 (커밋 안 함)
+    - 👣 **따라 하기: 연습 프로젝트로 '빌드 → 중단점 → Live Coding' 해 보기**
+        1. **프로젝트 만들기** — 런처 `Unreal Engine` → `Library` → 5.8 `Launch` → 프로젝트 브라우저 `Games` → `Blank` → `C++`·`Desktop`·`Scalable`·Starter Content 해제 → 위치 `C:\Projects` · 이름 `Sandbox` → `Create` → 잠시 뒤 **Visual Studio가 자동으로 열린다** (첫 컴파일에 몇 분)
+        2. **C++ 클래스 만들기** — 에디터 메뉴 `Tools` → `New C++ Class…` → `Actor` → 이름 `MyActor` → `Create Class` → 컴파일이 끝나면 Visual Studio에 `MyActor.h/.cpp`가 생긴다 → **에디터를 닫는다**
+        3. **구성 확인** — Visual Studio 위쪽 칸이 `Development Editor` · `Win64`인지, 오른쪽 `솔루션 탐색기`에서 `Games` 아래 `Sandbox`가 **굵게**(시작 프로젝트) 보이는지 확인. 아니면 `Sandbox` 우클릭 → `시작 프로젝트로 설정`. 맨 위에 구성 요소가 부족하다는 노란 알림이 뜨면 `설치`
+        4. **코드 한 줄** — `Ctrl+T` → `MyActor.cpp` 입력해 열기 → `BeginPlay()` 안 `Super::BeginPlay();` 바로 아랫줄에 아래 코드 붙여넣기 → `Ctrl+S`  `UE_LOG(LogTemp, Warning, TEXT("Hello Unreal from C++!"));`
+        5. **중단점 찍기** — 방금 붙인 줄을 클릭하고 **F9** (또는 줄 번호 왼쪽 회색 여백 클릭) → 빨간 점이 생기면 중단점('이 줄에서 멈춰라')
+        6. **디버그 실행** — **F5** (위쪽 ▶ `로컬 Windows 디버거`) → 빌드가 끝나면 언리얼 에디터가 뜬다 (처음엔 몇 분)
+        7. **멈추는지 확인** — 콘텐츠 브라우저 `C++ Classes` → `Sandbox`의 `MyActor`를 레벨로 끌어다 놓기 → ▶ `Play` → Visual Studio가 앞으로 나오며 그 줄에서 멈추고, 아래 `호출 스택`(Call Stack) 창에 호출 순서가 보이면 성공 → **F5**로 계속
+        8. **Live Coding 해 보기** — 에디터를 켠 채 Visual Studio에서 로그 문구만 바꾸고 `Ctrl+S` → 에디터로 돌아가 `Ctrl+Alt+F11`(또는 오른쪽 아래 Compile 버튼) → 다시 Play하면 바뀐 문구가 `Window` → `Output Log`에 보인다
+        9. **빌드 규칙 기억하기** — `.cpp` 함수 안만 고쳤으면 **Live Coding**. 헤더(.h)·`UPROPERTY`·생성자를 고쳤으면 **에디터 종료 → Visual Studio에서 F5**. 헷갈리면 언제나 뒤쪽이 안전
+        10. **시간 기록** — Visual Studio 아래 `출력`(Output) 창에 나온 빌드 시간을 TIL에 적어 두기 (나중에 비교 기준)
 - [ ] `Git` **[필수]** **GitHub Desktop** 설치·로그인 → 이름·이메일 확인 → Git LFS 무료 한도 확인 (카드의 따라 하기 순서대로)
     - 👣 **따라 하기: GitHub Desktop 설치 · 로그인**
-        1. **설치** — desktop.github.com에서 GitHub Desktop을 내려받아 응용 프로그램 폴더로 옮기고 실행
+        1. **설치** — desktop.github.com에서 GitHub Desktop을 내려받아 설치 파일 실행 (자동으로 설치되고 바로 실행된다)
         2. **로그인** — `Sign in to GitHub.com` → 브라우저에서 `Authorize desktop` 승인 → Desktop으로 돌아오기
-        3. **계정 확인** — 메뉴 `GitHub Desktop` → `Settings…` → `Accounts`에 내 GitHub 계정이 보이면 OK
+        3. **계정 확인** — 메뉴 `File` → `Options…` → `Accounts`에 내 GitHub 계정이 보이면 OK
         4. **이름·이메일** — 같은 창의 `Git` 탭에서 Name·Email이 GitHub 계정과 같은지 확인 → `Save`
-        5. **작업 폴더** — Finder에서 홈 폴더(⌘⇧H) → `Projects` 폴더 확인 (미리 만들어 둠) — 앞으로 모든 저장소를 여기에 둔다
+        5. **작업 폴더** — 파일 탐색기(`Win+E`) → `내 PC` → `로컬 디스크 (C:)`에 `Projects` 폴더 만들기 → 앞으로 모든 저장소를 `C:\Projects`에 둔다 (한글·공백 없는 짧은 경로, OneDrive 폴더는 피하기)
         6. **무료 한도 확인** — GitHub 웹 Settings의 결제(Billing) 메뉴에서 Git LFS 무료 한도 확인(저장 10GiB · 월 10GiB). 결제수단이 없으면 초과 시 업로드가 막힐 뿐 요금은 나가지 않는다
-- [ ] `Git` **[필수]** 학습 로그 저장소 `unreal-study-log`가 GitHub에 올라가 있는지 확인 (이미 올렸다면 바로 체크)
-    - 👣 **따라 하기: 학습 로그 저장소 확인 (이미 올렸다면 체크만)**
-        1. **GitHub Desktop** — 왼쪽 위 `Current Repository` 목록에 `unreal-study-log`가 있으면 OK
-        2. **GitHub 웹** — 메뉴 `Repository` → `View on GitHub` → README와 `curriculum`·`ue5-til` 폴더가 보이면 완료
-        3. **아직이라면** — 📚 전체 커리큘럼 → `Git 기록 가이드` 탭의 '학습 로그 저장소 GitHub에 올리기' 순서대로
+- [ ] `Git` **[필수]** 학습 로그 저장소 `unreal-study-log`를 Windows PC로 가져오기 (Clone → `C:\Projects`)
+    - 👣 **따라 하기: 학습 로그 저장소를 Windows PC로 가져오기 (Clone)**
+        1. **Clone 열기** — GitHub Desktop 메뉴 `File` → `Clone repository…` → `GitHub.com` 탭
+        2. **저장소 고르기** — 목록에서 `unreal-study-log` 선택 → 아래 `Local path`를 `C:\Projects\unreal-study-log`로 → `Clone`
+        3. **확인** — 메뉴 `Repository` → `Show in Explorer` → `curriculum`·`ue5-til`·`cpp-basics`·`coding-test` 폴더가 보이면 성공
+        4. **커리큘럼 열기** — `curriculum` 폴더의 `UnrealEngine_6Month_Study_Guide.html`을 **Chrome 또는 Edge**로 열고 즐겨찾기에 추가 — 앞으로 매일 여기서 시작
+        5. **맥에서 체크한 게 있다면** — 맥 브라우저에서 ⚙ → `진척도 내보내기` → 받은 파일을 Windows로 옮겨 ⚙ → `진척도 가져오기` (없으면 건너뛰기)
 - [ ] `Git` **[필수]** GitHub 프로필 정리(사진·한 줄 소개) + 브라우저에서 학습 로그 저장소의 README가 보이는지 확인
 - [ ] `AI` **[필수]** AI 도구 2개 준비 + AI 학습 원칙 읽기
     - 👣 **따라 하기: AI 도구 준비**
         1. **채팅형 AI 1개** — Claude·ChatGPT·Gemini 중 하나 — 개념 질문과 설명용
-        2. **코드를 읽는 AI 1개** — Rider AI Assistant, Claude Code, Cursor 중 하나 — 내 프로젝트 파일을 보며 답하게 할 때
+        2. **코드를 읽는 AI 1개** — GitHub Copilot(Visual Studio 내장), Claude Code, Cursor 중 하나 — 내 프로젝트 파일을 보며 답하게 할 때
         3. **규칙 파일** — `CLAUDE.md`는 W1 첫날 카드의 '파일 받기'로 게임 저장소에 넣는다. 'UE 5.8 · Epic 코딩 표준 · 힌트 먼저 · 모든 줄 해설' 규칙이 들어 있다
         4. **원칙 읽기** — 📚 전체 커리큘럼 → `AI 학습법` 탭의 5원칙과 AI 레벨(L1→L3)을 한 번 읽기
 - [ ] `소스` [심화] (선택) Epic Games 계정 ↔ GitHub 연동 → EpicGames 조직 초대 수락 → 웹에서 `EpicGames/UnrealEngine` 열람 확인
@@ -255,7 +257,7 @@
 
 **🏁 완료 기준(DoD)**
 - 빈 C++ 프로젝트에서 중단점이 걸리고 콜스택이 보인다.
-- 터미널의 `xcode-select -p` 결과가 설치한 Xcode 26.1.1을 가리킨다.
+- `.cpp`를 고친 뒤 Live Coding(`Ctrl+Alt+F11`)으로 에디터를 끄지 않고 반영되는 것을 확인했다.
 - GitHub에 학습 로그 저장소가 보이고, GitHub Desktop에서 그 저장소가 열린다.
 
 **🎤 자가 점검 · 면접 질문** (답은 펼쳐서 확인)
@@ -272,22 +274,22 @@
 
 **🤖 AI 프롬프트**
 ```text
-나는 M4 맥북(16GB)에서 UE 5.8 C++ 개발 환경을 만들고 있어. Xcode 버전 선택, xcode-select 설정, Rider 연동, 에디터 성능 설정을 체크리스트로 정리해줘. 각 항목마다 '제대로 됐는지 확인하는 방법'을 붙이고, 확실하지 않은 버전 정보는 '공식 문서 확인 필요'라고 표시해줘.
+나는 Windows PC에서 UE 5.8 C++ 개발 환경을 만들고 있어. Visual Studio 버전·워크로드 선택, 언리얼용 VS 옵션, 프로젝트 경로 규칙, 에디터 성능 설정을 체크리스트로 정리해줘. 각 항목마다 '제대로 됐는지 확인하는 방법'을 붙이고, 확실하지 않은 버전 정보는 '공식 문서 확인 필요'라고 표시해줘.
 ```
 
 **📅 요일별 계획** (날짜는 HTML의 '오늘 학습'에서 시작일을 정하면 계산됩니다)
-- Day 1 (월, 약 3시간): 과제1 UE 5.8 설치 (Epic Games Launcher) · 과제2 Xcode 26.1.1 설치하고 언리얼이 쓰도록 고르기 · 자가 점검
-- Day 2 (화, 약 3시간): 과제3 Rider 설치 + 비상업 무료 라이선스
-- Day 3 (수, 약 3시간): 과제5 연습 프로젝트 Sandbox로 '빌드 → 중단점' 해 보기 (커밋 안 함) · 과제4 에디터를 가볍게 설정하기 (16GB 맥용)
-- Day 4 (목, 약 3시간): 과제6 GitHub Desktop 설치·로그인 → 이름·이메일 확인 → Git L… · 과제7 학습 로그 저장소 unreal-study-log가 GitHub에 올라가 있… · 자가 점검
+- Day 1 (월, 약 3시간): 과제1 UE 5.8 설치 (Epic Games Launcher) · 과제2 Visual Studio 2026 설치 (C++ 게임 개발 워크로드) · 자가 점검
+- Day 2 (화, 약 3시간): 과제3 Visual Studio를 언리얼용으로 설정하기
+- Day 3 (수, 약 3시간): 과제5 연습 프로젝트 Sandbox로 '빌드 → 중단점 → Live Coding'… · 과제4 에디터를 가볍게 설정하기 (PC 사양이 낮을 때 특히)
+- Day 4 (목, 약 3시간): 과제6 GitHub Desktop 설치·로그인 → 이름·이메일 확인 → Git L… · 과제7 학습 로그 저장소 unreal-study-log를 Windows PC로 가… · 자가 점검
 - Day 5 (금, 약 3시간): 과제8 GitHub 프로필 정리(사진·한 줄 소개) + 브라우저에서 학습 로그 저… · 과제9 AI 도구 2개 준비 + AI 학습 원칙 읽기 · 과제10 (선택) Epic Games 계정 ↔ GitHub 연동 → EpicGame…(심화) · TIL
 - Day 6 (토, 약 5.5시간): 휴식
 - Day 7 (일, 약 2.5시간): 휴식
 
 **📒 이번 주 Git 기록**
-- 남길 기록: 학습 로그 저장소 `unreal-study-log` 만들기 (게임 저장소는 W1)
+- 남길 기록: 학습 로그 저장소 Clone → `C:\Projects\unreal-study-log` (게임 저장소는 W1)
 
-**➕ 심화(선택):** `.editorconfig` 추가로 들여쓰기·줄바꿈 규칙 통일 / Rider 단축키 10개(정의 이동, 사용처 찾기, 파일 검색, 빌드, 디버그 실행 등) 손에 익히기
+**➕ 심화(선택):** `.editorconfig` 추가로 들여쓰기·줄바꿈 규칙 통일 / Visual Studio 단축키 손에 익히기: F12 정의 이동 · Shift+F12 참조 찾기 · Ctrl+T 검색 · F9 중단점 · F5 디버그 실행 · Ctrl+Shift+B 빌드
 
 ---
 
@@ -326,11 +328,11 @@
 **✅ 과제**
 - [ ] `구현` **[필수]** UE 프로젝트 `ActionArena` 만들고 GitHub Desktop으로 게임 저장소 올리기
     - 👣 **따라 하기: 게임 저장소 만들기 (UE 프로젝트 연결)**
-        1. **프로젝트 만들기** — 언리얼 에디터: Games → Blank → C++ · Desktop · Scalable · Starter Content 끔 · 위치 `Projects` · 이름 `ActionArena` → Create → 에디터가 열리면 한 번 닫기
-        2. **LFS 설정 파일 넣기** — 아래 '파일 받기'로 `gitattributes.txt`를 받아 Finder에서 `ActionArena` 폴더로 옮긴 뒤 이름을 `.gitattributes`로 바꾸기 → 경고 창에서 `'.' 사용` → 파일이 사라져 보이면 정상(숨김 파일, ⌘⇧. 로 보기). `CLAUDE.md`도 같은 폴더에 넣기
+        1. **프로젝트 만들기** — 언리얼 에디터: Games → Blank → C++ · Desktop · Scalable · Starter Content 끔 · 위치 `C:\Projects` · 이름 `ActionArena` → Create → Visual Studio와 에디터가 열리면 에디터는 한 번 닫기
+        2. **LFS 설정 파일 넣기** — 아래 '파일 받기'로 `gitattributes.txt`를 받기 → 파일 탐색기 위쪽 `보기` → `표시` → `파일 확장명` 켜기 → 파일을 `C:\Projects\ActionArena`로 옮기고 이름을 `.gitattributes.`(**끝에 점 하나 더**)로 바꾸면 끝의 점이 사라지며 `.gitattributes`가 된다. `CLAUDE.md`도 같은 폴더에 넣기
         3. **저장소로 만들기** — GitHub Desktop `File` → `Add Local Repository…` → `Choose…`로 `ActionArena` 폴더 선택 → 안내 문구의 `create a repository` 클릭
-        4. **만들기 창** — Name은 **그대로**(`ActionArena`) · Git Ignore는 **`UnrealEngine`** 선택 · README 체크 안 함 → `Create Repository` → Git LFS를 묻는 창이 뜨면 `Initialize Git LFS`
-        5. **빠진 파일 확인** — 왼쪽 `Changes` 탭에 `Binaries`·`Intermediate`·`Saved`·`DerivedDataCache`가 **보이면 안 됨**(보이면 멈추고 질문). `.DS_Store`가 보이면 우클릭 → `Ignore all .DS_Store files`. 남은 파일이 있으면 Summary에 `chore: UE 5.8 프로젝트 생성` → `Commit to main`
+        4. **만들기 창** — Name은 **그대로**(`ActionArena`) · Git Ignore는 `UnrealEngine` 선택 · README 체크 안 함 → `Create Repository` → Git LFS를 묻는 창이 뜨면 `Initialize Git LFS`
+        5. **빠진 파일 확인** — 왼쪽 `Changes` 탭에 `Binaries`·`Intermediate`·`Saved`·`DerivedDataCache`가 **보이면 안 됨**(보이면 멈추고 질문). `Thumbs.db`·`desktop.ini` 같은 윈도우 파일이 보이면 우클릭 → `Ignore file`. 남은 파일이 있으면 Summary에 `chore: UE 5.8 프로젝트 생성` → `Commit to main`
         6. **GitHub에 올리기** — 위쪽 `Publish repository` → Name을 `UE5-ActionArena`로 바꾸고 `Keep this code private` 체크 해제 → `Publish Repository`
         7. **웹에서 정리 도구 켜기** — 브라우저에서 저장소 열기 → `Issues` → `Labels`(feat·bug·docs·perf), `Milestones`(M1~M6, 마감일 = 각 단계 마지막 주 일요일) → `Projects` → `New project` → Board
 - [ ] `구현` **[필수]** `AFloatingItem` 액터: StaticMesh 컴포넌트 + Tick에서 사인파 상하 이동·회전. 속도·높이는 `UPROPERTY(EditAnywhere)`로 노출
@@ -427,7 +429,7 @@ UHT(Unreal Header Tool)가 리플렉션용 코드를 자동 생성하고, 그 �
 | `Engine/Source/Runtime/Core/Public/UObject/NameTypes.h` | `FName`이 문자열 대신 무엇을 저장하는지(이름 테이블 인덱스) |
 
 **✅ 과제**
-- [ ] `학습` **[필수]** 순수 C++ 포인터 실험 3개(`clang++`로 터미널 컴파일): 값 전달 / 포인터 전달 / 참조 전달로 함수 안에서 값 바꾸기 + 주소 출력 → 지난번 C# `ref` TIL과 비교
+- [ ] `학습` **[필수]** 순수 C++ 포인터 실험 3개(Visual Studio에서 C++ `콘솔 앱` 프로젝트를 만들어 Ctrl+F5로 실행): 값 전달 / 포인터 전달 / 참조 전달로 함수 안에서 값 바꾸기 + 주소 출력 → 지난번 C# `ref` TIL과 비교
 - [ ] `구현` **[필수]** `AGCLabActor`로 'UPROPERTY가 없으면 GC가 지운다' 실험하기
     - UObject 멤버 2개 만들기 — 하나는 `UPROPERTY()`를 붙이고, 하나는 붙이지 않는다
     - 둘 다 `TWeakObjectPtr`로도 가리켜 둔다 (사라졌는지 관찰용)
@@ -485,7 +487,7 @@ C#의 GC와 언리얼의 GC를 비교해서 설명해줘. 특히 UPROPERTY를 �
 ```
 
 **📅 요일별 계획** (날짜는 HTML의 '오늘 학습'에서 시작일을 정하면 계산됩니다)
-- Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 과제1 순수 C++ 포인터 실험 3개(clang++로 터미널 컴파일) · 코테 · 자가 점검 · TIL
+- Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 과제1 순수 C++ 포인터 실험 3개(Visual Studio에서 C++ 콘솔 앱… · 코테 · 자가 점검 · TIL
 - Day 2 (화, 약 3시간): 과제6 ObjectMacros.h에서 내가 쓴 지정자 3개의 원문 주석을 찾아 T… · 과제5 프로젝트 로그 카테고리 정의(DECLARE_LOG_CATEGORY_EXTE… · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 3 (수, 약 3시간): 과제4 UPROPERTY 지정자 놀이터 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 4 (목, 약 3시간): 과제2 AGCLabActor로 'UPROPERTY가 없으면 GC가 지운다' 실험하기 · 코테 · 자가 점검 · 커밋·Push · PR · TIL
@@ -1402,7 +1404,7 @@ AI Perception으로 시야 감지가 안 되는 문제를 디버깅하고 있어
 | `Engine/Source/Runtime/Engine/Classes/GameFramework/GameStateBase.h` | `PlayerArray`, 복제되는 상태 |
 | `Engine/Source/Runtime/Engine/Classes/GameFramework/SaveGame.h` | `USaveGame` — 무엇이 저장되나(UPROPERTY 직렬화) |
 | `Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h` | `SaveGameToSlot`, `AsyncSaveGameToSlot`, `LoadGameFromSlot` |
-| `Subsystems/WorldSubsystem.h (Engine 모듈 — Rider에서 파일명 검색)` | `ShouldCreateSubsystem`, `Initialize`/`Deinitialize` |
+| `Subsystems/WorldSubsystem.h (Engine 모듈 — Visual Studio Ctrl+T로 파일명 검색)` | `ShouldCreateSubsystem`, `Initialize`/`Deinitialize` |
 
 **✅ 과제**
 - [ ] `구현` **[필수]** 게임 흐름 `EArenaPhase`(Waiting/InWave/Break/GameOver) — GameMode가 전환하고 GameState가 보관
@@ -1494,17 +1496,17 @@ Engine(엔진 전체), Editor(에디터), GameInstance(게임 실행~종료, 레
 **핵심 개념**
 - Epic C++ 코딩 표준 셀프 리뷰(네이밍, const, include 순서, `TObjectPtr`)
 - include 최소화·전방 선언(빌드 시간), `.Build.cs` 모듈 의존성 정리
-- 패키징: Mac Development/Shipping, Maps & Modes, 쿠킹 에러 읽기, `Saved/Logs`·`Saved/Crashes`
+- 패키징: Windows Development/Shipping, Maps & Modes, 쿠킹 에러 읽기, `Saved/Logs`·`Saved/Crashes`
 - 플레이테스트 운영: 관찰 → 피드백 → 이슈 등록 → 우선순위 라벨
 
 **유니티/C#에서 건너오기**
-- 유니티 Build Settings → Build ↔ Platforms → Mac → Package Project (쿠킹 포함)
+- 유니티 Build Settings → Build ↔ Platforms → Windows → Package Project (쿠킹 포함)
 
 **✅ 과제**
 - [ ] `AI-Off` **[필수]** C++ 필기 점검: 이 문서 W1~W12의 C++ 자가 점검 질문을 AI 없이 답변 → 틀린 것만 오답 노트
 - [ ] `AI-Off` **[필수]** **월간 AI-Off 챌린지 ③(90분):** 빈 프로젝트에 'HealthComponent + 데미지 + 사망 델리게이트 + 체력바'를 AI 없이 구현 → 막힌 지점 기록
 - [ ] `구현` **[필수]** 전체 코드 셀프 리뷰 PR: 네이밍, const, UPROPERTY 누락, 불필요한 Tick, include 정리 — AI 리뷰 결과와 '내가 채택/거절한 이유'를 함께 기록
-- [ ] `구현` **[필수]** Mac 패키징(Shipping) 성공 → 실행 확인 → GitHub Release에 빌드 첨부(파일당 2GiB 이하) 또는 영상만
+- [ ] `구현` **[필수]** Windows 패키징(Shipping) 성공 → 다른 폴더에 풀어 실행 확인 → zip으로 묶어 GitHub Release에 첨부(파일당 2GiB 이하) — 평가자가 바로 실행해 볼 수 있다
 - [ ] `구현` **[필수]** 지인 3명 플레이테스트 → 피드백을 이슈로 등록하고 우선순위 라벨
 - [ ] `Git` **[필수]** Release **v0.3.0** '싱글플레이 MVP' + 90초 영상 + README 1차 완성(기능 표·아키텍처 다이어그램)
 - [ ] `코테` **[필수]** 4문제(C++) 풀이·커밋
@@ -1556,7 +1558,7 @@ Engine(엔진 전체), Editor(에디터), GameInstance(게임 실행~종료, 레
 - Day 1 (월, 약 3시간): 이번 주 개념·엔진 소스 공부 · 과제1 C++ 필기 점검 · 코테 · 자가 점검 · TIL
 - Day 2 (화, 약 3시간): 과제2 월간 AI-Off 챌린지 ③(90분) · 코테 · 자가 점검 · TIL
 - Day 3 (수, 약 3시간): 과제3 전체 코드 셀프 리뷰 PR · 코테 · 자가 점검 · 커밋·Push · PR · TIL
-- Day 4 (목, 약 3시간): 과제4 Mac 패키징(Shipping) 성공 → 실행 확인 → GitHub Rel… · 코테 · 자가 점검 · 커밋·Push · PR · TIL
+- Day 4 (목, 약 3시간): 과제4 Windows 패키징(Shipping) 성공 → 다른 폴더에 풀어 실행 확… · 코테 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 5 (금, 약 3시간): 과제5 지인 3명 플레이테스트 → 피드백을 이슈로 등록하고 우선순위 라벨 · 자가 점검 · 커밋·Push · PR · TIL
 - Day 6 (토, 약 5.5시간): 보충 · 이번 주 문서 다듬기 · 자가 점검 · TIL
 - Day 7 (일, 약 2.5시간): 주간 복습(자가 점검 전체) + 🔔 주간 Devlog
@@ -1569,7 +1571,7 @@ Engine(엔진 전체), Editor(에디터), GameInstance(게임 실행~종료, 레
 - 🏷 릴리즈: `v0.3.0` (🔔 알림 → 릴리즈)
 - 주간 Devlog: `docs/devlog/W13.md` (🔔 알림 → 주간 Devlog)
 
-**➕ 심화(선택):** 가능하면 Windows PC(학원·지인)에서 같은 저장소를 클론해 빌드 — 업계 표준 환경 경험
+**➕ 심화(선택):** 다른 PC(학원·지인)에서 저장소를 Clone해 처음부터 빌드되는지 확인 — 빠진 파일·설정을 찾는 좋은 테스트
 
 ---
 
@@ -1965,7 +1967,7 @@ GAS로 근접 콤보를 구현할 때 PlayMontageAndWait와 WaitGameplayEvent를
 - 게임 스레드 / 렌더 스레드 / GPU 병목 구분
 - Unreal Insights: CPU 트레이스, Memory Insights, Networking Insights
 - Tick 정리, 적 다수일 때 CMC·애니메이션 비용(업데이트 비율, 화면 밖 애니메이션 틱 옵션), 네트워크 `NetUpdateFrequency`·Dormancy·Relevancy
-- 맥북 측정 주의: 발열 스로틀링 → 같은 조건으로 여러 번 측정해 중간값 사용
+- 측정 주의: 노트북이면 전원을 연결하고 Windows 전원 모드를 '최고 성능'으로, 같은 조건에서 여러 번 측정해 중간값 사용
 
 **유니티/C#에서 건너오기**
 - Unity Profiler ↔ Unreal Insights, `Profiler.BeginSample` ↔ `TRACE_CPUPROFILER_EVENT_SCOPE`
@@ -2421,7 +2423,7 @@ check: 실패 시 크래시, Shipping에선 기본적으로 식 자체가 제거
 ### AI 페어 프로그래밍 5원칙
 
 1. **설명 못 하는 코드는 커밋하지 않는다** — PR 셀프 리뷰 체크리스트 1번. 모르는 줄은 AI에게 다시 묻고, 이해한 내용을 TIL에 내 말로 쓴다.
-2. **엔진 API는 소스에서 확인한다** — AI는 UE4 시절 API나 존재하지 않는 함수를 지어내기도 한다. Rider에서 Go to Definition(⌘B)으로 시그니처·주석을 직접 확인하고, 틀렸던 사례는 TIL에 기록한다(면접 소재).
+2. **엔진 API는 소스에서 확인한다** — AI는 UE4 시절 API나 존재하지 않는 함수를 지어내기도 한다. Visual Studio에서 F12(정의로 이동)로 시그니처·주석을 직접 확인하고, 틀렸던 사례는 TIL에 기록한다(면접 소재).
 3. **15분 룰** — 버그는 15분 동안 직접 좁힌다(로그·중단점·콜스택). 그다음 AI에게 '내가 시도한 것'과 함께 묻는다.
 4. **힌트 먼저, 코드는 마지막** — 새 기능은 '설계·단계·주의점'부터 묻는다. 코드를 받더라도 마지막 단계에서.
 5. **PR에 AI 활용 내역을 남긴다** — 무엇을 AI가 도왔고, 무엇을 검증·수정했는지. 'AI를 책임 있게 쓰는 개발자'라는 증거가 된다.
@@ -2519,7 +2521,7 @@ UE5-ActionArena/                 ← 게임 프로젝트 (메인 포트폴리오
 ├── CHANGELOG.md  TESTING.md
 └── README.md
 
-unreal-study-log/                ← 학습 로그 + 이 커리큘럼 (~/Projects에 미리 만들어 둠)
+unreal-study-log/                ← 학습 로그 + 이 커리큘럼 (C:\Projects에 Clone)
 ├── curriculum/          이 커리큘럼 HTML·MD (브라우저로 HTML을 열어 매일 학습)
 ├── ue5-til/             매일 TIL · 2026-12-01-주제.md (CSharpCourse의 TodayILearn과 구분)
 ├── cpp-basics/          포인터·참조 실험, 해설 주석 코드 (00-first-taste = 첫 C++)
@@ -2596,27 +2598,28 @@ unreal-study-log/                ← 학습 로그 + 이 커리큘럼 (~/Project
 
 **GitHub Desktop 설치 · 로그인**
 
-1. **설치** — desktop.github.com에서 GitHub Desktop을 내려받아 응용 프로그램 폴더로 옮기고 실행
+1. **설치** — desktop.github.com에서 GitHub Desktop을 내려받아 설치 파일 실행 (자동으로 설치되고 바로 실행된다)
 2. **로그인** — `Sign in to GitHub.com` → 브라우저에서 `Authorize desktop` 승인 → Desktop으로 돌아오기
-3. **계정 확인** — 메뉴 `GitHub Desktop` → `Settings…` → `Accounts`에 내 GitHub 계정이 보이면 OK
+3. **계정 확인** — 메뉴 `File` → `Options…` → `Accounts`에 내 GitHub 계정이 보이면 OK
 4. **이름·이메일** — 같은 창의 `Git` 탭에서 Name·Email이 GitHub 계정과 같은지 확인 → `Save`
-5. **작업 폴더** — Finder에서 홈 폴더(⌘⇧H) → `Projects` 폴더 확인 (미리 만들어 둠) — 앞으로 모든 저장소를 여기에 둔다
+5. **작업 폴더** — 파일 탐색기(`Win+E`) → `내 PC` → `로컬 디스크 (C:)`에 `Projects` 폴더 만들기 → 앞으로 모든 저장소를 `C:\Projects`에 둔다 (한글·공백 없는 짧은 경로, OneDrive 폴더는 피하기)
 6. **무료 한도 확인** — GitHub 웹 Settings의 결제(Billing) 메뉴에서 Git LFS 무료 한도 확인(저장 10GiB · 월 10GiB). 결제수단이 없으면 초과 시 업로드가 막힐 뿐 요금은 나가지 않는다
 
-**학습 로그 저장소 GitHub에 올리기**
+**학습 로그 저장소를 Windows PC로 가져오기 (Clone)**
 
-1. **폴더 확인** — Finder에서 ⌘⇧G → `~/Projects/unreal-study-log` → `curriculum`(이 커리큘럼)·`ue5-til`·`cpp-basics`·`coding-test` 등이 보이면 OK. 이미 Git 저장소로 만들어져 있고 첫 커밋도 되어 있다
-2. **Desktop에 추가** — GitHub Desktop 메뉴 `File` → `Add Local Repository…` → `Choose…`로 `unreal-study-log` 폴더 선택 → `Add Repository`
-3. **GitHub에 올리기** — 위쪽 `Publish repository` → `Keep this code private` **체크 해제**(공개해야 포트폴리오) → `Publish Repository`
-4. **확인** — 브라우저에서 내 GitHub의 `unreal-study-log` 저장소를 열어 README와 폴더들이 보이면 성공. README 맨 위 게임 저장소 링크는 W1 이후 내 주소로 고치기
+1. **Clone 열기** — GitHub Desktop 메뉴 `File` → `Clone repository…` → `GitHub.com` 탭
+2. **저장소 고르기** — 목록에서 `unreal-study-log` 선택 → 아래 `Local path`를 `C:\Projects\unreal-study-log`로 → `Clone`
+3. **확인** — 메뉴 `Repository` → `Show in Explorer` → `curriculum`·`ue5-til`·`cpp-basics`·`coding-test` 폴더가 보이면 성공
+4. **커리큘럼 열기** — `curriculum` 폴더의 `UnrealEngine_6Month_Study_Guide.html`을 **Chrome 또는 Edge**로 열고 즐겨찾기에 추가 — 앞으로 매일 여기서 시작
+5. **맥에서 체크한 게 있다면** — 맥 브라우저에서 ⚙ → `진척도 내보내기` → 받은 파일을 Windows로 옮겨 ⚙ → `진척도 가져오기` (없으면 건너뛰기)
 
 **게임 저장소 만들기 (UE 프로젝트 연결)**
 
-1. **프로젝트 만들기** — 언리얼 에디터: Games → Blank → C++ · Desktop · Scalable · Starter Content 끔 · 위치 `Projects` · 이름 `ActionArena` → Create → 에디터가 열리면 한 번 닫기
-2. **LFS 설정 파일 넣기** — 아래 '파일 받기'로 `gitattributes.txt`를 받아 Finder에서 `ActionArena` 폴더로 옮긴 뒤 이름을 `.gitattributes`로 바꾸기 → 경고 창에서 `'.' 사용` → 파일이 사라져 보이면 정상(숨김 파일, ⌘⇧. 로 보기). `CLAUDE.md`도 같은 폴더에 넣기
+1. **프로젝트 만들기** — 언리얼 에디터: Games → Blank → C++ · Desktop · Scalable · Starter Content 끔 · 위치 `C:\Projects` · 이름 `ActionArena` → Create → Visual Studio와 에디터가 열리면 에디터는 한 번 닫기
+2. **LFS 설정 파일 넣기** — 아래 '파일 받기'로 `gitattributes.txt`를 받기 → 파일 탐색기 위쪽 `보기` → `표시` → `파일 확장명` 켜기 → 파일을 `C:\Projects\ActionArena`로 옮기고 이름을 `.gitattributes.`(**끝에 점 하나 더**)로 바꾸면 끝의 점이 사라지며 `.gitattributes`가 된다. `CLAUDE.md`도 같은 폴더에 넣기
 3. **저장소로 만들기** — GitHub Desktop `File` → `Add Local Repository…` → `Choose…`로 `ActionArena` 폴더 선택 → 안내 문구의 `create a repository` 클릭
-4. **만들기 창** — Name은 **그대로**(`ActionArena`) · Git Ignore는 **`UnrealEngine`** 선택 · README 체크 안 함 → `Create Repository` → Git LFS를 묻는 창이 뜨면 `Initialize Git LFS`
-5. **빠진 파일 확인** — 왼쪽 `Changes` 탭에 `Binaries`·`Intermediate`·`Saved`·`DerivedDataCache`가 **보이면 안 됨**(보이면 멈추고 질문). `.DS_Store`가 보이면 우클릭 → `Ignore all .DS_Store files`. 남은 파일이 있으면 Summary에 `chore: UE 5.8 프로젝트 생성` → `Commit to main`
+4. **만들기 창** — Name은 **그대로**(`ActionArena`) · Git Ignore는 `UnrealEngine` 선택 · README 체크 안 함 → `Create Repository` → Git LFS를 묻는 창이 뜨면 `Initialize Git LFS`
+5. **빠진 파일 확인** — 왼쪽 `Changes` 탭에 `Binaries`·`Intermediate`·`Saved`·`DerivedDataCache`가 **보이면 안 됨**(보이면 멈추고 질문). `Thumbs.db`·`desktop.ini` 같은 윈도우 파일이 보이면 우클릭 → `Ignore file`. 남은 파일이 있으면 Summary에 `chore: UE 5.8 프로젝트 생성` → `Commit to main`
 6. **GitHub에 올리기** — 위쪽 `Publish repository` → Name을 `UE5-ActionArena`로 바꾸고 `Keep this code private` 체크 해제 → `Publish Repository`
 7. **웹에서 정리 도구 켜기** — 브라우저에서 저장소 열기 → `Issues` → `Labels`(feat·bug·docs·perf), `Milestones`(M1~M6, 마감일 = 각 단계 마지막 주 일요일) → `Projects` → `New project` → Board
 
@@ -2650,7 +2653,7 @@ unreal-study-log/                ← 학습 로그 + 이 커리큘럼 (~/Project
 ### 기능이 완성되면: PR 열기 → 합치기
 
 1. **브랜치 확인** — GitHub Desktop `Current Branch`가 PR로 올릴 작업 브랜치인지 확인 (Push까지 끝난 상태)
-2. **PR 열기** — 메뉴 `Branch` → `Create Pull Request` (⌘R) → 브라우저에 GitHub 화면이 열린다
+2. **PR 열기** — 메뉴 `Branch` → `Create pull request` (Ctrl+R) → 브라우저에 GitHub 화면이 열린다
 3. **내용 붙이기** — 제목 칸에 PR 제목, 본문 칸에 PR 본문을 붙여넣기 → GIF·영상 파일을 본문에 끌어다 놓기
 4. **만들기** — 초록색 `Create pull request` 클릭
 5. **셀프 리뷰** — PR 화면 `Files changed` 탭 → 설명하고 싶은 코드 줄 번호 옆 `+` → 왜 이렇게 했는지 한두 줄 → `Add single comment`
@@ -2661,15 +2664,15 @@ unreal-study-log/                ← 학습 로그 + 이 커리큘럼 (~/Project
 ### 매일: TIL 올리기
 
 1. **저장소 고르기** — GitHub Desktop 위쪽 `Current Repository` → `unreal-study-log`
-2. **파일 넣기** — 메뉴 `Repository` → `Show in Finder` → `ue5-til` 폴더 열기 → 다운로드 폴더(Finder에서 ⌥⌘L)의 TIL 파일을 끌어다 넣기 (📁 바로 저장했다면 건너뛰기)
+2. **파일 넣기** — 메뉴 `Repository` → `Show in Explorer` → `ue5-til` 폴더 열기 → 파일 탐색기 왼쪽 `다운로드` 폴더의 TIL 파일을 끌어다 넣기 (📁 바로 저장했다면 건너뛰기)
 3. **메시지 쓰기** — Desktop 왼쪽 `Changes`에 파일이 보이면 `Summary` 칸에 아래 메시지 붙여넣기
 4. **커밋·올리기** — `Commit to main` → 위쪽 `Push origin`
 
 ### 주간 Devlog · 월간 회고 올리기
 
 1. **저장소 고르기** — GitHub Desktop `Current Repository` → `ActionArena`, `Current Branch` → `main` → `Fetch origin`(→ `Pull origin`이 뜨면 클릭)
-2. **파일 넣기** — 메뉴 `Repository` → `Show in Finder` → `docs/devlog(또는 docs/retro)` 폴더 열기(없으면 `docs` 안에 만들기) → 다운로드 폴더의 파일 끌어다 넣기
-3. **내 말로 채우기** — 그 파일을 Rider나 텍스트 편집기로 열어 빈칸을 내 말로 채우고 저장
+2. **파일 넣기** — 메뉴 `Repository` → `Show in Explorer` → `docs/devlog(또는 docs/retro)` 폴더 열기(없으면 `docs` 안에 만들기) → 다운로드 폴더의 파일 끌어다 넣기
+3. **내 말로 채우기** — 그 파일을 Visual Studio나 메모장으로 열어 빈칸을 내 말로 채우고 저장
 4. **커밋·올리기** — Desktop `Summary`에 아래 메시지 붙여넣기 → `Commit to main` → `Push origin`
 
 ### 릴리즈 만들기 (GitHub 웹)
@@ -2681,9 +2684,9 @@ unreal-study-log/                ← 학습 로그 + 이 커리큘럼 (~/Project
 
 ### GIF · 영상 만들기
 
-1. **녹화** — ⌘⇧5 → `선택 부분 기록` → 언리얼 뷰포트 영역만 드래그 → `기록` → 5~15초 시연 → 메뉴 막대의 ■로 정지 (바탕화면에 .mov 저장)
+1. **녹화** — Windows 11 **캡처 도구**(시작 메뉴에서 '캡처 도구') → 🎥 녹화 → `+ 새로 만들기` → 언리얼 뷰포트 영역만 드래그 → `시작` → 5~15초 시연 → `중지` → 저장 (.mp4)
 2. **PR·이슈엔 그대로** — .mov 파일을 GitHub 본문 칸에 그대로 끌어다 놓아도 된다 (10MB 이하 권장)
-3. **GIF로 바꾸기** — App Store의 무료 앱 `Gifski` 설치 → .mov를 끌어다 놓기 → 너비 800 · FPS 15 → 저장 → README·Devlog에 사용
+3. **GIF로 만들기** — 무료 프로그램 **ScreenToGif**(screentogif.com) 설치 → `Recorder` → 뷰포트 영역에 창을 맞추고 녹화 → `Stop` → 편집 창에서 `Save as` → GIF (너비 800 정도) → README·Devlog에 사용
 4. **잘 찍는 요령** — 기능 하나만, 짧게, 판정 범위는 디버그 드로잉을 켜고 찍는다
 
 ### 매주 · 매달
@@ -2705,7 +2708,7 @@ unreal-study-log/                ← 학습 로그 + 이 커리큘럼 (~/Project
 | 파일 변경을 버리고 싶다 | `Changes`에서 파일 우클릭 → `Discard Changes…` | ⚠️ 되돌리기 어렵다. 확실할 때만 |
 | Push가 안 된다 | 위쪽 버튼이 `Pull origin`이면 먼저 누르고 → 그다음 `Push origin` | GitHub 쪽에 내 컴퓨터에 없는 변경이 있을 때 |
 | 충돌(conflict) 창이 떴다 | 코드 파일: 파일 옆 메뉴로 편집기에서 열어 `<<<<<<<`~`>>>>>>>` 구간 정리 후 저장 / 에셋(.uasset): 어느 쪽 파일을 쓸지 고르기 → `Continue merge`(또는 `Commit merge`) | 헷갈리면 멈추고 화면을 찍어 질문 |
-| `Binaries`·`Intermediate`가 Changes에 잔뜩 보인다 | 커밋하지 말 것. `.gitignore`가 프로젝트 폴더 최상위에 있는지 확인 (Finder에서 ⌘⇧. 로 숨김 파일 보기) | 이미 커밋했다면 멘토와 함께 정리 |
+| `Binaries`·`Intermediate`가 Changes에 잔뜩 보인다 | 커밋하지 말 것. `.gitignore`가 프로젝트 폴더 최상위에 있는지 확인 (파일 탐색기 `보기` → `표시` → `숨긴 항목`으로 숨김 파일 보기) | 이미 커밋했다면 멘토와 함께 정리 |
 | Git LFS를 묻는 창이 떴다 | `Initialize Git LFS` 클릭 | `.uasset`을 LFS로 올리기 위해 필요 |
 | 이 버튼은 확인받고 누르기 | `Discard All Changes…`, `Force push`, 브랜치 삭제 | ⚠️ 작업이 사라질 수 있다 |
 
@@ -2933,7 +2936,7 @@ TS 문서 1건을 '증상 → 가설 → 검증 → 원인 → 해결 → 재발
 
 ## 9. 템플릿
 
-### .gitignore (언리얼 + 맥)
+### .gitignore (언리얼 + Windows)
 GitHub Desktop에서 저장소를 만들 때 Git Ignore를 `UnrealEngine`으로 고르면 자동으로 생긴다. 아래는 직접 관리하고 싶을 때의 예시.
 
 ````gitignore
@@ -2949,9 +2952,9 @@ Plugins/**/Intermediate/
 .idea/
 .vs/
 .vscode/
-*.xcodeproj/
-*.xcworkspace/
 *.sln
+Thumbs.db
+desktop.ini
 .DS_Store
 
 # 외부 에셋(라이선스상 공개 저장소 업로드 금지) — 받는 방법은 README에
@@ -2981,7 +2984,7 @@ AI 도구가 프로젝트 루트의 규칙 파일을 읽는다면 같은 내용�
 
 ````markdown
 # 프로젝트 규칙 (AI용)
-- 엔진: Unreal Engine 5.8 / 언어: C++ / 플랫폼: macOS(Apple Silicon)
+- 엔진: Unreal Engine 5.8 / 언어: C++ / 플랫폼: Windows 11 · Visual Studio 2026
 - 나는 C#/유니티 출신 C++ 입문자다. 설명은 C#과 비교해서 해줘.
 - 코딩 표준: Epic C++ Coding Standard (접두사 A/U/F/T/E/I, b 접두 bool)
 - UObject 멤버 포인터는 반드시 UPROPERTY() + TObjectPtr.
@@ -3183,7 +3186,7 @@ perf(ai): BTService 주기 0.1s → 0.25s, 적 100마리 기준 게임 스레드
 체력: 델리게이트 컴포넌트(W5) → 데이터 파이프라인(W8) → 복제(W15) → GAS(W17)
 
 ## 개발 환경 · 빌드
-UE 5.8 · macOS · Rider / 외부 에셋 받는 방법
+UE 5.8 · Windows · Visual Studio 2026 / 외부 에셋 받는 방법
 
 ## 개발 기록 인덱스
 Devlog · Troubleshooting · ADR · Engine Notes · Known Issues
@@ -3228,7 +3231,8 @@ Devlog · Troubleshooting · ADR · Engine Notes · Known Issues
 | 분류 | 자료 | 용도 |
 |---|---|---|
 | 공식 | [Epic Developer Community 문서 (UE 5.8)](https://dev.epicgames.com/documentation/en-us/unreal-engine) | 코딩 표준 · Gameplay Framework · Enhanced Input · Networking · GAS · Unreal Insights |
-| 공식 | [macOS 개발 요구사항](https://dev.epicgames.com/documentation/en-us/unreal-engine/macos-development-requirements-for-unreal-engine) | Xcode 호환 버전은 설치 직전에 여기서 재확인 |
+| 공식 | [Visual Studio 설정 (UE 공식)](https://dev.epicgames.com/documentation/en-us/unreal-engine/setting-up-visual-studio-development-environment-for-cplusplus-projects-in-unreal-engine) | 설치할 워크로드·구성 요소와 UE 버전별 VS 버전 표 — 설치 직전에 재확인 |
+| 공식 | [하드웨어·소프트웨어 사양 (UE 공식)](https://dev.epicgames.com/documentation/en-us/unreal-engine/hardware-and-software-specifications-for-unreal-engine) | 권장 PC 사양 |
 | 공식 | [Epic C++ 코딩 표준](https://dev.epicgames.com/documentation/en-us/unreal-engine/epic-cplusplus-coding-standard-for-unreal-engine) | W13 셀프 리뷰 기준 |
 | 공식 | [Unreal MCP (UE 5.8 실험 기능)](https://dev.epicgames.com/documentation/unreal-engine/unreal-mcp-in-unreal-editor) | W21 딥다이브 A |
 | 샘플 | Lyra Starter Game (Fab, 무료) | GAS·모듈 구조 참고용 — 초반엔 너무 크니 W16 이후 '부분'만 |
@@ -3277,12 +3281,14 @@ Devlog · Troubleshooting · ADR · Engine Notes · Known Issues
 
 | 기능 | 어디에 있나 |
 |---|---|
-| **콘솔 명령 입력** | ▶ Play 중 `` ` `` 키(숫자 1 왼쪽). **한글 입력 상태면 ₩가 입력되며 열리지 않는다** → 영문 입력으로 바꾸고 누르기. 또는 메뉴 `Window` → `Output Log` 아래쪽 `Cmd` 칸에 입력 |
+| **콘솔 명령 입력** | ▶ Play 중 `` ` `` 키(Esc 아래, 숫자 1 왼쪽). 안 열리면 메뉴 `Window` → `Output Log` 아래쪽 `Cmd` 칸에 입력 |
+| **Visual Studio 프로젝트 파일 다시 만들기** | `.uproject` 파일 우클릭 → `Generate Visual Studio project files` (Windows 11은 `추가 옵션 표시` 안에 있음). 파일을 추가·삭제했는데 VS에 안 보일 때 |
+| **빌드 에러 읽기** | Visual Studio 아래 `출력`(Output) 창에서 **첫 번째** `error`부터 읽는다. `오류 목록`보다 정확하다 |
 | **Editor Preferences** | 에디터 창 왼쪽 위 메뉴 `Edit` → `Editor Preferences` → 위쪽 검색창에 설정 이름 입력 |
 | **Project Settings** | 메뉴 `Edit` → `Project Settings` (콜리전 채널: `Engine` → `Collision`, 기본 맵·GameMode: `Project` → `Maps & Modes`) |
 | **화질(Scalability)** | 뷰포트 위쪽 툴바의 계기판(속도계) 아이콘 → Scalability. UE 5.5 이전은 오른쪽 위 `Settings` |
 | **콘텐츠 팩 추가** | 콘텐츠 브라우저 `+ Add` → `Add Feature or Content Pack…` → `Third Person` → `Add to Project` |
-| **C++ 클래스 만들기** | 메뉴 `Tools` → `New C++ Class…` → 부모 클래스 선택 → 이름 → `Create Class` (끝나면 에디터를 닫고 Rider에서 빌드) |
+| **C++ 클래스 만들기** | 메뉴 `Tools` → `New C++ Class…` → 부모 클래스 선택 → 이름 → `Create Class` (Visual Studio에 파일이 생긴다 — 헤더를 고칠 땐 에디터를 닫고 F5) |
 | **BP 자식 만들기** | 콘텐츠 브라우저 `C++ Classes` 폴더에서 내 클래스 우클릭 → `Create Blueprint class based on …` |
 | **입력 에셋** | 콘텐츠 브라우저 빈 곳 우클릭 → `Input` → `Input Action` / `Input Mapping Context` |
 | **Animation Blueprint · Blend Space** | 콘텐츠 브라우저 우클릭 → `Animation` → `Animation Blueprint`(부모로 내 AnimInstance 선택) / `Blend Space` |
@@ -3297,7 +3303,7 @@ Devlog · Troubleshooting · ADR · Engine Notes · Known Issues
 | **2인 멀티 Play** | 툴바 ▶ Play 옆 `⋮` → `Number of Players` = 2, `Net Mode` = `Play As Listen Server` |
 | **네트워크 에뮬레이션** | `Edit` → `Editor Preferences` → `Level Editor` → `Play` → `Multiplayer Options` → `Enable Network Emulation` (지연·손실 값 입력) |
 | **플러그인 켜기** | 메뉴 `Edit` → `Plugins` → 검색 → 체크 → 에디터 재시작 |
-| **패키징** | 툴바 `Platforms` → `Mac` → `Package Project` (Shipping은 같은 메뉴의 `Binary Configuration`에서 선택) |
+| **패키징** | 툴바 `Platforms` → `Windows` → `Package Project` (Shipping은 같은 메뉴의 `Binary Configuration`에서 선택) |
 | **자동화 테스트 실행** | 메뉴 `Tools` → `Session Frontend` → `Automation` 탭 (또는 `Tools` → `Test Automation`) |
 | **World Settings** | 메뉴 `Window` → `World Settings` (이 레벨에서 쓸 GameMode 지정) |
 
@@ -3306,17 +3312,18 @@ Devlog · Troubleshooting · ADR · Engine Notes · Known Issues
 | 용어 | 뜻 |
 |---|---|
 | **핫픽스** | 큰 버전(5.8) 안에서 버그만 고친 작은 업데이트(5.8.1, 5.8.2…). 가장 높은 번호를 쓰면 된다. |
-| **콜스택** | 지금 이 줄에 오기까지 어떤 함수가 어떤 순서로 불렸는지 쌓인 목록. 중단점에서 멈추면 보인다. |
+| **콜스택 (호출 스택)** | 지금 이 줄에 오기까지 어떤 함수가 어떤 순서로 불렸는지 쌓인 목록. 중단점에서 멈추면 Visual Studio 아래 `호출 스택` 창에 보인다. |
 | **중단점 (Breakpoint)** | '이 줄에서 멈춰라' 표시. 멈춘 상태에서 변수 값과 콜스택을 볼 수 있다. |
-| **디버그 실행** | 디버거를 붙여 실행하는 것. 중단점에서 멈추려면 Rider의 벌레(Debug) 버튼으로 실행해야 한다. |
+| **디버그 실행** | 디버거를 붙여 실행하는 것. 중단점에서 멈추려면 Visual Studio에서 **F5**(디버깅 시작)로 실행해야 한다. |
 | **빌드 · 컴파일** | 내가 쓴 C++ 코드를 컴퓨터가 실행할 수 있는 파일로 바꾸는 과정. |
 | **링크 에러** | 선언(.h)은 있는데 정의(.cpp의 함수 본문)를 못 찾을 때 나는 에러. |
 | **헤더 · 소스** | `.h`는 '무엇이 있는지'(선언), `.cpp`는 '어떻게 동작하는지'(정의). |
-| **IDE** | 코드 편집·빌드·디버깅을 한 곳에서 하는 프로그램 (Rider, Xcode, Visual Studio). |
-| **인덱싱** | Rider가 엔진·프로젝트 코드를 미리 읽어 목록을 만드는 과정. 끝나야 자동완성·검색이 빠르다. |
-| **터미널 · sudo** | 터미널은 글자로 명령을 입력하는 맥 앱. `sudo`는 '관리자 권한으로 실행'이라 맥 비밀번호를 묻고, 입력해도 화면에 안 보인다. |
-| **Live Coding** | 에디터를 켠 채 C++ 일부를 다시 컴파일하는 기능. 맥에서는 기대하지 말고 '종료 → 빌드 → 재실행'을 쓴다. |
-| **실행 구성** | Rider 위쪽에서 '무엇을 어떤 모드로 실행할지' 고르는 칸. 보통 `Development Editor`. |
+| **IDE** | 코드 편집·빌드·디버깅을 한 곳에서 하는 프로그램 (Visual Studio, Rider). |
+| **IntelliSense** | Visual Studio가 엔진·프로젝트 코드를 읽어 자동완성·정의 이동 데이터를 만드는 기능. 처음 열면 오래 걸리고, 끝나야 F12·자동완성이 빠르다. |
+| **₩ 와 \** | 한글 Windows에서는 경로 구분 기호 `\`가 글꼴에 따라 `₩`로 보인다. 같은 글자이니 그대로 쓰면 된다 (예: `C:\Projects` = `C:₩Projects`). |
+| **솔루션 탐색기 · 시작 프로젝트** | 솔루션 탐색기는 Visual Studio 오른쪽 파일 목록. 굵게 보이는 프로젝트가 시작 프로젝트이고, F5를 누르면 그 프로젝트가 실행된다 (내 게임 프로젝트여야 함). |
+| **Live Coding** | 에디터를 켠 채 `.cpp`를 다시 컴파일해 바로 반영하는 기능(`Ctrl+Alt+F11`). 헤더(.h)·`UPROPERTY`·생성자를 바꿨다면 에디터를 끄고 Visual Studio에서 F5로 다시 실행한다. |
+| **솔루션 구성** | Visual Studio 위쪽에서 고르는 빌드 모드. 언리얼 작업은 보통 `Development Editor` + `Win64`. |
 | **PIE** | Play In Editor — 에디터 안에서 ▶ Play로 게임을 바로 실행해 보는 것. |
 | **뷰포트 · 콘텐츠 브라우저** | 뷰포트는 가운데 3D 화면(유니티 Scene 뷰), 콘텐츠 브라우저는 아래쪽 에셋 목록(유니티 Project 창). |
 | **레벨 (맵)** | 게임의 한 장면 (유니티 Scene). |

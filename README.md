@@ -7,10 +7,16 @@
 
 | 파일 | 쓰는 법 |
 |---|---|
-| [curriculum/UnrealEngine_6Month_Study_Guide.html](curriculum/UnrealEngine_6Month_Study_Guide.html) | **Chrome으로 열기** → '📅 오늘 학습' 카드를 넘기며 공부부터 기록까지 진행 |
+| [curriculum/UnrealEngine_6Month_Study_Guide.html](curriculum/UnrealEngine_6Month_Study_Guide.html) | **Chrome 또는 Edge로 열기** → '📅 오늘 학습' 카드를 넘기며 공부부터 기록까지 진행 |
 | [curriculum/UnrealEngine_6Month_Study_Plan.md](curriculum/UnrealEngine_6Month_Study_Plan.md) | 같은 내용의 문서판 (GitHub에서 읽기용) |
 
 > 진척도는 브라우저에 저장됩니다. 컴퓨터·브라우저를 바꿀 땐 HTML의 ⚙ → 진척도 내보내기/가져오기.
+
+## 💻 개발 환경
+
+- **Windows 11 · Unreal Engine 5.8 · Visual Studio 2026 · GitHub Desktop**
+- 이 저장소는 `C:\Projects\unreal-study-log`에 Clone해서 씁니다 (한글·공백 없는 짧은 경로, OneDrive 폴더 밖)
+- 게임 프로젝트는 `C:\Projects\ActionArena`
 
 ## 폴더 안내
 

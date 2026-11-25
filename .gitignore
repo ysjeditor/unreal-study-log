@@ -1,8 +1,24 @@
-# macOS
+# Windows
+Thumbs.db
+desktop.ini
+
+# macOS (예전 맥에서 만든 파일)
 .DS_Store
 
-# C++ 빌드 결과물
+# Visual Studio 콘솔 프로젝트 빌드 결과물 (cpp-basics, coding-test)
+.vs/
+x64/
+Debug/
+Release/
+*.exe
+*.obj
+*.pdb
+*.ilk
+*.idb
+*.tlog
+*.user
+
+# 기타 빌드 결과물
 *.o
 *.out
-hello
 build/
