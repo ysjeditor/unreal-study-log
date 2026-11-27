@@ -29,6 +29,8 @@
 | `coding-test/programmers/` | 프로그래머스 풀이 (C++) | `lv1-문제이름.cpp` |
 | `ai-off/` | AI 없이 재구현한 챌린지 기록 | `01-floating-item.md` |
 | `interview/` | 면접 답변 스크립트 · 모의 면접 복기 | `answers.md` |
+| `tutor/` | 🎓 과외 세션 진도 노트 (어느 컴퓨터에서든 이어서 배우기) | `progress.md` |
+| `CLAUDE.md` | 과외 세션 규칙 — 이 폴더에서 Claude Code를 열면 자동으로 읽힘 | — |
 
 ## 진행 기록
 
